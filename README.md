@@ -25,10 +25,12 @@ Seven skills, split into two tiers based on external dependencies.
 
 ## Quickstart
 
+> First time on a new machine? See **[INSTALL.md](INSTALL.md)** for the full step-by-step (prereqs, troubleshooting, uninstall).
+
 ### Windows (PowerShell)
 
 ```powershell
-git clone <your-private-repo-url> arend-claude-skills
+git clone https://github.com/shibuschock/skills.git arend-claude-skills
 cd arend-claude-skills
 
 # Tier 1 only (safest on a fresh/locked-down laptop)
@@ -47,6 +49,9 @@ cd arend-claude-skills
 ### macOS / Linux
 
 ```bash
+git clone https://github.com/shibuschock/skills.git arend-claude-skills
+cd arend-claude-skills
+chmod +x install.sh
 ./install.sh             # tier 1
 ./install.sh --all       # everything
 ./install.sh --skills daydream,humanizer
