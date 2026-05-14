@@ -1,0 +1,19 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Dev environments
+.vscode/
+.idea/
+
+# Local installer test artifacts
+test-install/
+*.test.log
+
+# Node / Python detritus if any skill grows these
+node_modules/
+__pycache__/
+*.pyc

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "generated": "2026-05-14",
+  "installTarget": "$env:USERPROFILE\\.claude\\skills",
+  "skills": [
+    {
+      "name": "daydream",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 4,
+      "sizeBytes": 15649.0,
+      "sha256": "581705a96cc4fa6f425bb05006e0b7b7e1b1c5a2e211a86ded70a1cdbba548c6"
+    },
+    {
+      "name": "humanizer",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 4,
+      "sizeBytes": 41864.0,
+      "sha256": "3d6b71d2216bfcbafb01223239ef7b4c25648f35a7228cc6091be96fcfb112fe"
+    },
+    {
+      "name": "stop-slop",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 7,
+      "sizeBytes": 16840.0,
+      "sha256": "2d396dc51b2f837484bfc298a3b27eae5f0755043e0ff7db47f097ce6c8933be"
+    },
+    {
+      "name": "remotion-best-practices",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 39,
+      "sizeBytes": 117321.0,
+      "sha256": "ef8bdb67176eeeb8e141d252e660d0a2423a70334fa5c8d26c23527e1dbc2f89",
+      "note": "Optional: npm + Remotion at use time"
+    },
+    {
+      "name": "find-skills",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 1,
+      "sizeBytes": 5446.0,
+      "sha256": "add52628a64f2488210b206ae5b5ce33f7ece429d529320ace1022f0bb6d5f5f"
+    },
+    {
+      "name": "huashu-design",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 155,
+      "sizeBytes": 32638510.0,
+      "sha256": "fb9ad522c0c4636b919a79bef3f93114006508d494171deff97d8b31b94113e4",
+      "note": "Large (~32MB, 155 files: HTML demos + assets); Playwright/Node optional at use time"
+    },
+    {
+      "name": "video-input",
+      "tier": 2,
+      "binaries": [
+        "ffmpeg",
+        "ffprobe",
+        "whisper-cli"
+      ],
+      "fileCount": 3,
+      "sizeBytes": 37135.0,
+      "sha256": "bf6b99134e1226366c6a0ff75fd9ddb6c8cf30c28c9f8abfad39ded2a2205b51",
+      "note": "whisper-cli or whisper.cpp main binary"
+    }
+  ]
+}
