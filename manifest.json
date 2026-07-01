@@ -65,6 +65,42 @@
       "sizeBytes": 37135.0,
       "sha256": "bf6b99134e1226366c6a0ff75fd9ddb6c8cf30c28c9f8abfad39ded2a2205b51",
       "note": "whisper-cli or whisper.cpp main binary"
+    },
+    {
+      "name": "cia-builder",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 9,
+      "sizeBytes": 69890.0,
+      "sha256": "ca586692460826d1484d069d6c907d56d91f76d710aa59732d3058c725df21a7",
+      "note": "Needs: pip install openpyxl"
+    },
+    {
+      "name": "sha-builder",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 9,
+      "sizeBytes": 51969.0,
+      "sha256": "23dcbfd953cd360a82da13ba79343705275b5dfabb0cc06e407643edb39bed5a",
+      "note": "Needs: pip install openpyxl"
+    },
+    {
+      "name": "tom-vro-builder",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 16,
+      "sizeBytes": 155374.0,
+      "sha256": "96da787d9b46c1d4b123878a187432428d259c00c5e76eb9163da91aa793e384",
+      "note": "Needs: pip install python-pptx python-docx openpyxl"
+    },
+    {
+      "name": "comms-toolkit",
+      "tier": 1,
+      "binaries": [],
+      "fileCount": 16,
+      "sizeBytes": 60876.0,
+      "sha256": "f19fe15d642014eca4e9014c5232878f2dd29f3642f0283ad9f36a0d960d4713",
+      "note": "Needs: pip install openpyxl"
     }
   ]
 }

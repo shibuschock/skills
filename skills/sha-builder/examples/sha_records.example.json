@@ -1,0 +1,32 @@
+[
+  {
+    "stakeholder_group": "Store Leadership",
+    "business_unit": "Retail", "location": "HQ", "category": "Operations Leadership",
+    "group_description": "District and store managers accountable for floor operations and inventory.",
+    "influence": 5, "interest": 5,
+    "influence_rationale": "Control floor execution and adoption at the point of sale.",
+    "interest_rationale": "Replenishment and OTB changes directly reshape their daily work.",
+    "impact_from_change": "Daily reorder routine replaced by exception management.",
+    "decision_authority": "Floor execution; local inventory calls.",
+    "current_sentiment": "Mixed",
+    "key_pain_points": "Skeptical the system handles local events.",
+    "communication_preferences": "In-person huddles; short async updates.",
+    "main_point_of_contact": "Jane Doe",
+    "change_champion": "Sam Lee",
+    "additional_notes": "High-tenure team; will need hands-on coaching.",
+    "follow_up_needed": "Confirm district rollout sequence."
+  },
+  {
+    "stakeholder_group": "Finance & Accounting",
+    "business_unit": "Finance", "location": "HQ", "category": "Finance",
+    "group_description": "Corporate finance team owning the ledger and reporting.",
+    "influence": 4, "interest": 3,
+    "influence_rationale": "Owns financial sign-off and reporting standards.",
+    "interest_rationale": "Affected mainly at period close.",
+    "impact_from_change": "New subledger reconciliation steps.",
+    "decision_authority": "GL mapping; close calendar.",
+    "current_sentiment": "Neutral",
+    "communication_preferences": "Email; scheduled briefings.",
+    "main_point_of_contact": "Pat Kim"
+  }
+]

@@ -4,7 +4,7 @@ Personal Claude Code skills, packaged for transfer to a fresh machine (e.g. ente
 
 ## What's in here
 
-Seven skills, split into two tiers based on external dependencies.
+Eleven skills. The original seven are split by external-binary dependency; a new **OCM suite** of four adds Python-library skills.
 
 ### Tier 1 — pure markdown, zero deps (safe on locked-down laptops)
 
@@ -22,6 +22,17 @@ Seven skills, split into two tiers based on external dependencies.
 | Skill | Needs | Install hint |
 |---|---|---|
 | **video-input** | `ffmpeg`, `ffprobe`, `whisper-cli` | `winget install Gyan.FFmpeg` + build [whisper.cpp](https://github.com/ggerganov/whisper.cpp) |
+
+### OCM suite — needs Python libraries (`pip install`)
+
+Four portable organizational-change-management skills (client-agnostic, cross-platform, conversational). They run Python to render Office/HTML deliverables from workshop transcripts / a CIA. Install their libs once: `pip install openpyxl python-docx python-pptx`. Render scripts refuse to overwrite existing outputs unless `--force`.
+
+| Skill | What it does |
+|---|---|
+| **cia-builder** | Change Impact Assessment (6 MECE Change Dimensions) -> Excel workbook + interactive HTML dashboard. |
+| **sha-builder** | Stakeholder Assessment (Influence x Interest / Mendelow) -> Excel + HTML with engagement grid. |
+| **tom-vro-builder** | Target Operating Model + Value Realization accelerator -> PPTX slide + Word approach doc + Excel VRO registers + HTML dashboard. |
+| **comms-toolkit** | Change-comms operation from a CIA -> comms master grid (Excel) + dashboard (HTML) + CIA->comms coverage matrix (GAP flags) + plain-language QA + Markdown templates. |
 
 ## Quickstart
 

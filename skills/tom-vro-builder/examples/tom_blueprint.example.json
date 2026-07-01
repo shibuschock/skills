@@ -1,0 +1,67 @@
+{
+  "accelerator": {
+    "title": "Target Operating Model (TOM) Agent",
+    "subtitle": "AI-accelerated business-process operating model design",
+    "value_statement": "We leverage AI to accelerate target operating model design. The TOM Agent transforms your current-state process and change-impact data into a future operating model — mapping each function's lifecycle, redefining roles, data, and governance, and producing ready-to-run Future Ways of Working that move transformation to the front line faster.",
+    "capabilities_header": "Our TOM Agent's capabilities:",
+    "capabilities": [
+      {"icon": "funnel", "lead": "Ingests", "rest": " current-state & change-impact data (transcripts, CIA, fit-gaps) into a structured operating-model baseline"},
+      {"icon": "map", "lead": "Maps", "rest": " each function's lifecycle and the value streams across them — where the new system changes inputs, roles, timing & decisions"},
+      {"icon": "shapes", "lead": "Reshapes", "rest": " the model across eight TOM dimensions — from meetings, roles & data through to guest & service outcomes and locations & sourcing"},
+      {"icon": "ranking", "lead": "Prioritizes", "rest": " functional areas by people-impact density & severity, testing each design for coherence across the dimensions"},
+      {"icon": "discover", "lead": "Surfaces", "rest": " the new roles & seats, the value-at-risk from open gaps, and AI role-shifts — from producing analysis to approving recommendations"},
+      {"icon": "output", "lead": "Generates", "rest": " the benefits register (baseline source & owner per KPI), Future Ways of Working & governance — reconciled to canonical data"}
+    ]
+  },
+
+  "functional_groups": [
+    {"area": "Retail Merchandising", "rolls_up": ["Merchandise Operations"], "impact_count": 102, "priority": "Critical",
+     "lifecycle": "Plan > Buy > Allocate > Price/Promote > Replenish > Learn", "value_streams": ["concept-to-shelf"]},
+    {"area": "Supply Chain / Distribution", "rolls_up": ["Warehouse & Distribution"], "impact_count": 86, "priority": "High",
+     "lifecycle": "Forecast > Allocation > Warehouse ops > Store replenishment", "value_streams": ["demand-to-fulfil"]},
+    {"area": "Sourcing / Procure to Pay", "rolls_up": ["Procurement", "Payables"], "impact_count": 74, "priority": "High",
+     "lifecycle": "Vendor > RFQ > PO > Receipt > Invoice match > Payment", "value_streams": ["procure-to-pay"]},
+    {"area": "Finance / Accounting", "rolls_up": ["Finance & AP"], "impact_count": 24, "priority": "Medium",
+     "lifecycle": "Period close > Reconciliation > Reporting > Audit", "value_streams": []}
+  ],
+
+  "value_streams": [
+    {"name": "concept-to-shelf", "stages": ["product setup", "assortment", "pricing", "on-shelf availability"]},
+    {"name": "demand-to-fulfil", "stages": ["forecast", "allocation", "warehouse", "store"]},
+    {"name": "procure-to-pay", "stages": ["vendor", "PO", "receipt", "payment"]}
+  ],
+
+  "tom_dimensions": [
+    {"dimension": "Meetings & Decision Cadence", "current_state": "Multiple prep meetings to assemble data from several systems.", "future_state_questions": "Which meetings can be shortened or eliminated? What new forums (e.g., S&OP) are needed?"},
+    {"dimension": "Roles & Responsibilities", "current_state": "Category roles still running legacy processes; data ownership unclear.", "future_state_questions": "Who owns data at each stage gate? What new seats does the model imply?"},
+    {"dimension": "Data & Reporting", "current_state": "Data stitched together manually across systems.", "future_state_questions": "What reports become self-service? What data-quality gates are needed?"},
+    {"dimension": "Cross-Functional Coordination", "current_state": "BUs operate in separate systems/silos.", "future_state_questions": "How do shared items and cross-BU handoffs work in one system?"},
+    {"dimension": "Skills & Capabilities", "current_state": "Teams skilled in manual execution and spreadsheet workarounds.", "future_state_questions": "Where must the team upskill from execution to system governance? As AI handles routine triage, which roles shift from producing analysis to approving recommendations?"},
+    {"dimension": "Governance & Escalation", "current_state": "Governance drafted; sponsor roles defined but not activated.", "future_state_questions": "How does the change network operate post go-live? What guardrails govern AI-generated recommendations?"},
+    {"dimension": "Guest & Service Outcomes", "current_state": "Service-level effects (availability, experience) managed locally, not tracked as outcomes.", "future_state_questions": "Which service-level outcomes does the model improve, and how are they measured?"},
+    {"dimension": "Locations & Sourcing", "current_state": "Sites run different calendars/costing; sourcing fragmented.", "future_state_questions": "What stays local vs shared? Who owns the single procurement model and vendor master?"}
+  ],
+
+  "roles_and_seats": [
+    {"name": "Shared-data steward", "why": "Owns master data quality across BUs in the single system.", "owner": ""},
+    {"name": "Item-hierarchy council chair", "why": "Arbitrates cross-BU item and hierarchy conflicts.", "owner": ""}
+  ],
+
+  "value_at_risk": [
+    {"cluster": "Open-to-buy / financial planning", "benefit_at_risk": "Margin uplift; obsolescence reduction", "why": "Net-new capability with no current process; densest cluster of assumed gaps.", "source_gap": "Assumed"},
+    {"cluster": "Inventory-costing standardization", "benefit_at_risk": "Landed-cost visibility; margin accuracy", "why": "Cost method must be agreed before go-live or cost data is unreliable.", "source_gap": "Unconfirmed"}
+  ],
+
+  "vro_tiers": [
+    {"tier": "Strategic", "focus": "IRR / ROI tracking against the approved business case", "owner": "EPMO / Finance", "cadence": "Quarterly"},
+    {"tier": "Operational", "focus": "Process-level KPIs (forecast accuracy, inventory turns, landed cost)", "owner": "Business Process Owners", "cadence": "Monthly"},
+    {"tier": "Adoption", "focus": "System usage, training completion, workaround rates, user confidence", "owner": "Change Team", "cadence": "Bi-weekly during rollout"},
+    {"tier": "Behavioral", "focus": "Are teams working differently? New meetings held, old workarounds retired", "owner": "Change + Business Leads", "cadence": "Monthly"}
+  ],
+
+  "benefits_register": [
+    {"benefit": "Stockout reduction", "kpi": "% reduction in stockouts", "baseline_source": "POS out-of-stock report", "owner": "Retail Operations", "target": "", "timeline": "Release 2"},
+    {"benefit": "Inventory efficiency", "kpi": "Inventory turns", "baseline_source": "ERP inventory ledger", "owner": "Supply Chain", "target": "", "timeline": "Release 2"},
+    {"benefit": "Period-close acceleration", "kpi": "Business days to close", "baseline_source": "Finance close calendar", "owner": "Controller", "target": "", "timeline": "Release 3"}
+  ]
+}

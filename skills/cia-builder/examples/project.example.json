@@ -1,0 +1,40 @@
+{
+  "project_name": "Acme ERP",
+  "business_units": ["Retail", "Finance"],
+  "locations": ["HQ", "Plant"],
+  "brand": {
+    "navy": "#162B75",
+    "magenta": "#EE2C81",
+    "font": "Calibri, system-ui, sans-serif",
+    "footer": "Acme — Confidential"
+  },
+
+  "_optional_layers": "Everything below is OPTIONAL. Provide what your engagement uses; tabs appear only when supported by the data/config. Remove this key.",
+
+  "tom_shifts": [
+    {"name": "Reorder → exception-managed replenishment",
+     "description": "Move store leads from calculating orders to managing system exceptions.",
+     "today": "Manual weekly reorder math in spreadsheets.",
+     "future": "System-generated replenishment; humans handle exceptions.",
+     "owner": "Retail Operations"},
+    {"name": "Instinct buying → open-to-buy discipline",
+     "description": "Introduce an enterprise open-to-buy planning discipline for buyers.",
+     "today": "Buyers plan by instinct in Excel.",
+     "future": "Buyers operate a formal OTB cycle in the ERP.",
+     "owner": "Merchandising"}
+  ],
+
+  "benefits": [
+    {"benefit": "Stockout reduction", "description": "Fewer lost sales from out-of-stocks.",
+     "target_metric": "% reduction in stockouts", "baseline": "", "target": "", "confidence": "Medium"},
+    {"benefit": "Inventory efficiency", "description": "Lower working capital tied up in inventory.",
+     "target_metric": "Inventory turns", "baseline": "", "target": "", "confidence": "Medium"},
+    {"benefit": "Markdown avoidance", "description": "Better assortment planning reduces forced markdowns.",
+     "target_metric": "% markdown rate", "baseline": "", "target": "", "confidence": "Low"}
+  ],
+
+  "training": {
+    "modalities": ["ILT", "VILT", "e-learning", "in-app guidance", "job aid", "coaching"],
+    "stale_days": 30
+  }
+}

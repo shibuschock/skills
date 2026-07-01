@@ -1,0 +1,71 @@
+{
+  "audiences": [
+    {"id": "champ", "name": "Champions", "description": "Named change champions who cascade locally and feed sentiment back."},
+    {"id": "mgr", "name": "Managers", "description": "People leaders who pre-brief and run team cascades."},
+    {"id": "org", "name": "Org-wide", "description": "All impacted employees across business units."},
+    {"id": "retail", "name": "Retail BU", "description": "Store and retail-operations staff (BU-specific)."},
+    {"id": "steerco", "name": "Steering Committee", "description": "Executive sponsors and program leadership."}
+  ],
+
+  "channels": [
+    {"name": "Email series", "cadence": "Weekly", "owner": "Comms Lead"},
+    {"name": "Newsletter", "cadence": "Monthly", "owner": "Comms Lead"},
+    {"name": "Town hall", "cadence": "Monthly", "owner": "Program Lead"},
+    {"name": "Manager cascade", "cadence": "Per milestone", "owner": "Change Lead"},
+    {"name": "Champion touchpoint", "cadence": "Biweekly", "owner": "Change Lead"},
+    {"name": "SteerCo update", "cadence": "Biweekly", "owner": "Program Lead"}
+  ],
+
+  "activities": [
+    {"week": 1, "date": "2026-07-06", "audience": "org", "channel": "Email series",
+     "title": "What's Changing Ep.1 — Why we're moving to Acme ERP (Awareness)", "owner": "Comms Lead",
+     "comm_ref": "WC-01", "review_gate": "Approved", "status": "Sent"},
+    {"week": 1, "date": "2026-07-08", "audience": "Managers", "channel": "Manager cascade",
+     "title": "Manager pre-brief: Ep.1 talking points (24h before)", "owner": "Change Lead",
+     "comm_ref": "MC-01", "review_gate": "Approved", "status": "Sent"},
+    {"week": 2, "date": "2026-07-13", "audience": "org", "channel": "Email series",
+     "title": "What's Changing Ep.2 — How your process changes (Process)", "owner": "Comms Lead",
+     "comm_ref": "WC-02", "review_gate": "In review", "status": "Draft"},
+    {"week": 2, "date": "2026-07-15", "audience": "Champions", "channel": "Champion touchpoint",
+     "title": "Champion sync: field questions on the new replenishment flow", "owner": "Change Lead",
+     "comm_ref": "CT-01", "review_gate": "n/a", "status": "Planned"},
+    {"week": 3, "date": "2026-07-20", "audience": "org", "channel": "Email series",
+     "title": "What's Changing Ep.3 — Your training path and go-live (Training)", "owner": "Comms Lead",
+     "comm_ref": "WC-03", "review_gate": "Not started", "status": "Planned"},
+    {"week": 3, "date": "2026-07-22", "audience": "Retail BU", "channel": "Town hall",
+     "title": "Retail town hall: live demo + Q&A", "owner": "Program Lead",
+     "comm_ref": "TH-01", "review_gate": "Not started", "status": "Planned"},
+    {"week": 4, "date": "2026-07-27", "audience": "org", "channel": "Newsletter",
+     "title": "Monthly newsletter — progress, wins, and what's next", "owner": "Comms Lead",
+     "comm_ref": "NL-01", "review_gate": "Not started", "status": "Planned"},
+    {"week": 4, "date": "2026-07-29", "audience": "Steering Committee", "channel": "SteerCo update",
+     "title": "SteerCo: adoption metrics and comms coverage", "owner": "Program Lead",
+     "comm_ref": "SC-01", "review_gate": "Not started", "status": "Planned"}
+  ],
+
+  "coverage": [
+    {"impact": "Automated replenishment replacing manual reorder spreadsheets", "impact_id": 1,
+     "vehicle": "What's Changing Ep.2 + Retail town hall", "audience": "Retail BU", "status": "covered"},
+    {"impact": "Open-to-buy financial planning introduced as net-new capability", "impact_id": 2,
+     "vehicle": "Champion touchpoint + coaching comms", "audience": "Managers", "status": "gap"}
+  ],
+
+  "approval_gate": {
+    "draft_by": "Comms Lead",
+    "route": "Comms Lead -> Change Lead -> Sponsor sign-off",
+    "sla_hours": 48,
+    "send": "Comms Lead",
+    "reviewers": ["Change Lead (tone + scope-leak)", "BU SME (factual)", "Sponsor (sensitivity)"]
+  },
+
+  "crisis": [
+    {"scenario": "Vendor / partner delay pushes go-live",
+     "holding_24h": "Acknowledge the timeline question, confirm we are assessing impact, promise an update within 3 business days.",
+     "substantive_72h": "Share the revised milestone, what stays the same for teams, and the concrete next step for each business unit.",
+     "recovery_14d": "Recap the reset plan, reinforce the value case, and re-open the normal cadence with a confidence-rebuilding win."},
+    {"scenario": "Data incident during migration",
+     "holding_24h": "State the facts known, that the issue is contained and under investigation, and where to direct questions.",
+     "substantive_72h": "Explain root cause in plain language, remediation taken, and any action employees need to take.",
+     "recovery_14d": "Confirm resolution, publish the safeguards added, and thank teams for their patience."}
+  ]
+}
