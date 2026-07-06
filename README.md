@@ -4,7 +4,7 @@ Personal Claude Code skills, packaged for transfer to a fresh machine (e.g. ente
 
 ## What's in here
 
-Eleven skills. The original seven are split by external-binary dependency; a new **OCM suite** of four adds Python-library skills.
+Twenty-four entries. The original seven are split by external-binary dependency; the **OCM suite** adds sixteen Python-library skills (plus one shared folder) covering the full change-management lifecycle.
 
 ### Tier 1 — pure markdown, zero deps (safe on locked-down laptops)
 
@@ -25,14 +25,29 @@ Eleven skills. The original seven are split by external-binary dependency; a new
 
 ### OCM suite — needs Python libraries (`pip install`)
 
-Four portable organizational-change-management skills (client-agnostic, cross-platform, conversational). They run Python to render Office/HTML deliverables from workshop transcripts / a CIA. Install their libs once: `pip install openpyxl python-docx python-pptx`. Render scripts refuse to overwrite existing outputs unless `--force`.
+Sixteen portable organizational-change-management skills (client-agnostic, cross-platform, conversational) covering the full change lifecycle. They run Python to render Office/HTML deliverables from workshop transcripts / a CIA. Install their libs once: `pip install openpyxl python-docx python-pptx`. Render scripts refuse to overwrite existing outputs unless `--force`. The whole suite was simulation-tested end-to-end (July 2026) — every skill exercised by practitioner agents on a synthetic engagement, defects fixed.
+
+**Start here:** `docs/OCM Skill Suite Overview.html` — interactive catalog (what each skill does, when to use it, example asks) — and `docs/OCM-SUITE-README.md` for the pipeline and conventions.
 
 | Skill | What it does |
 |---|---|
-| **cia-builder** | Change Impact Assessment (6 MECE Change Dimensions) -> Excel workbook + interactive HTML dashboard. |
+| **cia-builder** | Change Impact Assessment (6 MECE Change Dimensions) -> Excel workbook + interactive HTML dashboard. The foundation the others chain from. |
 | **sha-builder** | Stakeholder Assessment (Influence x Interest / Mendelow) -> Excel + HTML with engagement grid. |
 | **tom-vro-builder** | Target Operating Model + Value Realization accelerator -> PPTX slide + Word approach doc + Excel VRO registers + HTML dashboard. |
-| **comms-toolkit** | Change-comms operation from a CIA -> comms master grid (Excel) + dashboard (HTML) + CIA->comms coverage matrix (GAP flags) + plain-language QA + Markdown templates. |
+| **comms-toolkit** | Change-comms operation from a CIA -> comms master grid (Excel) + dashboard (HTML) + coverage matrix (GAP flags) + plain-language QA + Markdown templates. |
+| **change-network-builder** | Champion/change-agent network: roster + coverage dashboard, nomination/onboarding/touchpoint templates. |
+| **adoption-metrics-builder** | Adoption & success measurement: metric-ladder register + dashboard; flags CIA value levers with no metric. |
+| **readiness-pulse-builder** | Pulse survey design (question bank, anonymity discipline) + readiness readout dashboards from results. |
+| **persona-journey-builder** | Tiered personas, current->future journeys, day-in-the-life narratives from CIA/SHA data. |
+| **ocm-playbook-builder** | OCM playbook + 90-day tactical plan: swimlane dashboard + activity register with GAP flags. |
+| **ocm-readout-builder** | Executive readouts: Change Intensity Map (derived from the CIA), who/what/how theme boards, leader talking points. |
+| **training-strategy-builder** | Training strategy upstream of the TNA: principles, modality-by-workforce matrix, governance, phasing. |
+| **training-needs-builder** | TNA from change impacts: audience x capability matrix + dashboard (no hours — that's curriculum-stage). |
+| **curriculum-architect** | Curriculum blueprint: learning paths, Bloom-aligned modules, 70-20-10 blend, prerequisites. |
+| **training-content-builder** | Per-module deliverables: facilitator/participant guides, job aids, slide outlines, assessments. |
+| **interactive-learning-builder** | Gamified quizzes + flashcards as self-contained HTML, optional SCORM 1.2 packaging. |
+| **training-rollout-builder** | Training deployment: waves anchored to go-lives, readiness gates, Kirkpatrick L1-L4, reinforcement. |
+| _`_training-shared`_ | Shared adult-learning methodology + per-project context template the training skills read. Install it alongside them. |
 
 ## Quickstart
 

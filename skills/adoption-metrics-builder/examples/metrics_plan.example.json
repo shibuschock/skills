@@ -1,0 +1,146 @@
+{
+  "metrics": [
+    {
+      "id": "E1", "name": "Sponsor Engagement Index",
+      "category": "Engagement", "ladder_level": "Readiness Input", "indicator_type": "Leading",
+      "description": "Qualitative assessment of sponsor visibility: communications sent, program events attended, floor walks.",
+      "how_measured": "Change-team observation log scored per reporting period",
+      "source": "Change-team observation log; meeting attendance", "owner": "Change Team",
+      "baseline": "", "target": "Active at all leadership tiers",
+      "threshold_amber": "One tier inactive", "threshold_red": "Executive sponsor inactive for a full cycle",
+      "cadence": "Monthly", "start_tracking": "Phase 0", "active": true
+    },
+    {
+      "id": "E2", "name": "Change Network Activation Rate",
+      "category": "Engagement", "ladder_level": "Readiness Input", "indicator_type": "Leading",
+      "description": "Share of designated change-agent positions that are filled and actively participating.",
+      "how_measured": "% positions filled; % attending briefings",
+      "source": "Change network roster; briefing attendance", "owner": "Change Team",
+      "baseline": "", "target": "100% filled; 80%+ active",
+      "threshold_amber": "<80% active", "threshold_red": "<60% active",
+      "cadence": "Monthly", "start_tracking": "When network launches", "active": true
+    },
+    {
+      "id": "E3", "name": "Pulse Survey Response Rate",
+      "category": "Engagement", "ladder_level": "Readiness Input", "indicator_type": "Leading",
+      "description": "Share of targeted stakeholders completing each pulse survey wave — a health check on the measurement channel itself.",
+      "how_measured": "Completed responses / targeted population per wave",
+      "source": "Survey platform analytics", "owner": "Change Team",
+      "baseline": "", "target": "≥50%", "threshold_amber": "40–50%", "threshold_red": "<40%",
+      "cadence": "Per pulse wave", "start_tracking": "First pulse survey", "active": true
+    },
+    {
+      "id": "RD1", "name": "Stakeholder Readiness Score",
+      "category": "Readiness", "ladder_level": "Readiness Input", "indicator_type": "Leading",
+      "description": "Average score across the anchor pulse questions; tracked by BU and wave-over-wave.",
+      "how_measured": "Mean of anchor question scores (1–5) per segment",
+      "source": "Pulse survey data", "owner": "Change Team",
+      "baseline": "", "target": "≥3.5 / 5.0 at each phase gate",
+      "threshold_amber": "3.0–3.5", "threshold_red": "<3.0",
+      "cadence": "Per pulse wave", "start_tracking": "First pulse survey", "active": true,
+      "notes": "Baseline established at first pulse — deliberately blank until then."
+    },
+    {
+      "id": "RD2", "name": "Training Completion Rate",
+      "category": "Readiness", "ladder_level": "Readiness Input", "indicator_type": "Leading",
+      "description": "Share of targeted users who completed required role-based training. (Deeper training-effectiveness evaluation lives in the training workstream.)",
+      "how_measured": "Completions / targeted users per role and BU",
+      "source": "LMS / training attendance records", "owner": "Change Team / L&D",
+      "baseline": "", "target": "≥90% before go-live",
+      "threshold_amber": "80–90%", "threshold_red": "<80%",
+      "cadence": "Weekly during training window", "start_tracking": "Training phase", "active": true
+    },
+    {
+      "id": "RD3", "name": "Change Impact Mitigation Coverage",
+      "category": "Readiness", "ladder_level": "Readiness Input", "indicator_type": "Leading",
+      "description": "Share of documented high-severity change impacts with a completed mitigation plan.",
+      "how_measured": "Mitigated high-severity impacts / total high-severity impacts in the CIA",
+      "source": "CIA tracking log", "owner": "Change Team",
+      "baseline": "", "target": "100% before go-live",
+      "threshold_amber": "<100% at readiness gate", "threshold_red": "<80% at readiness gate",
+      "cadence": "Monthly", "start_tracking": "CIA baseline complete"
+    },
+    {
+      "id": "AD1", "name": "System Login Rate",
+      "category": "Adoption", "ladder_level": "System Usage", "indicator_type": "Leading",
+      "description": "Share of expected users who have logged into the new system within 7/14/30 days of go-live.",
+      "how_measured": "Distinct logins / expected user population at Day 7, 14, 30",
+      "source": "System analytics", "owner": "IT / Change Team",
+      "baseline": "N/A (new system)", "target": "≥90% by Day 14",
+      "threshold_amber": "75–90% at Day 14", "threshold_red": "<75% at Day 14",
+      "cadence": "Weekly during hypercare", "start_tracking": "Go-live", "active": true
+    },
+    {
+      "id": "AD2", "name": "Transaction Completion Rate",
+      "category": "Adoption", "ladder_level": "System Usage", "indicator_type": "Leading",
+      "description": "Share of core business transactions processed through the new system versus legacy workarounds.",
+      "how_measured": "New-system transaction volume / total transaction volume",
+      "source": "System transaction logs", "owner": "IT / Process Owners",
+      "baseline": "", "target": "≥95% by Day 30",
+      "threshold_amber": "85–95%", "threshold_red": "<85%",
+      "cadence": "Weekly during hypercare", "start_tracking": "Go-live",
+      "value_levers": ["Inventory efficiency"]
+    },
+    {
+      "id": "AD3", "name": "Replenishment Exception-Handling Compliance",
+      "category": "Adoption", "ladder_level": "Behavior/Proficiency", "indicator_type": "Leading",
+      "description": "Share of replenishment exceptions triaged through the designed exception workflow rather than manual overrides.",
+      "how_measured": "Exceptions handled per designed workflow / total exceptions (audit sample)",
+      "source": "Process audit / spot checks; system override logs", "owner": "Process Owners / Change Team",
+      "baseline": "", "target": "≥90% by end of hypercare",
+      "threshold_amber": "75–90%", "threshold_red": "<75%",
+      "cadence": "Bi-weekly during hypercare", "start_tracking": "Go-live + 2 weeks",
+      "value_levers": ["Stockout reduction", "Inventory efficiency"],
+      "linked_impacts": ["Automated replenishment replacing manual reorder spreadsheets"]
+    },
+    {
+      "id": "AD4", "name": "Workaround Incidence Rate",
+      "category": "Adoption", "ladder_level": "Behavior/Proficiency", "indicator_type": "Leading",
+      "description": "Reported instances of users bypassing the new system or process.",
+      "how_measured": "Count of reported workarounds per period, by BU",
+      "source": "Change-agent feedback; help desk", "owner": "Change Team",
+      "baseline": "", "target": "Declining trend; zero by end of hypercare",
+      "threshold_amber": "Flat trend", "threshold_red": "Rising trend",
+      "cadence": "Weekly during hypercare", "start_tracking": "Go-live"
+    },
+    {
+      "id": "AD5", "name": "Support Ticket Volume & Trend",
+      "category": "Adoption", "ladder_level": "Behavior/Proficiency", "indicator_type": "Leading",
+      "description": "Volume and trend of adoption-attributable support tickets post-go-live.",
+      "how_measured": "Weekly ticket count in adoption-related categories; week-over-week trend",
+      "source": "Service desk system", "owner": "IT / Change Team",
+      "baseline": "", "target": "Declining week-over-week",
+      "threshold_amber": "Flat for 2 weeks", "threshold_red": "Rising for 2 weeks",
+      "cadence": "Weekly", "start_tracking": "Go-live", "active": true
+    },
+    {
+      "id": "PO1", "name": "Replenishment Cycle Time",
+      "category": "Business Outcome", "ladder_level": "Process Outcomes", "indicator_type": "Lagging",
+      "description": "End-to-end time from demand signal to purchase order release.",
+      "how_measured": "Median cycle time from operational reporting",
+      "source": "Operational reporting", "owner": "Process Owners",
+      "baseline": "", "target": "",
+      "cadence": "Monthly", "start_tracking": "Hypercare exit",
+      "value_levers": ["Stockout reduction"],
+      "notes": "Baseline and target deliberately blank — to be measured pre-go-live and set by the process owner, not invented."
+    },
+    {
+      "id": "BV1", "name": "Inventory Turns",
+      "category": "Business Outcome", "ladder_level": "Business Value", "indicator_type": "Lagging",
+      "description": "Working-capital efficiency of inventory; the business-case lever behind replenishment automation.",
+      "how_measured": "COGS / average inventory, per Finance definition",
+      "source": "Finance reporting", "owner": "Finance",
+      "baseline": "", "target": "",
+      "cadence": "Quarterly", "start_tracking": "First full quarter post-go-live",
+      "value_levers": ["Inventory efficiency"],
+      "notes": "Owned by Finance; included for alignment. Target per business case — blank until confirmed."
+    }
+  ],
+  "measurement_plan": {
+    "reporting_cadence": "Weekly change-team review during hypercare; monthly steering committee dashboard.",
+    "review_forum": "Steering committee (monthly) for the activation set; change-team weekly for the full register.",
+    "escalation": "Any red metric is escalated to the program sponsor at the next steering committee, with owner-prepared cause analysis and intervention proposal.",
+    "baseline_approach": "Perception baselines from the first pulse survey; process/value baselines measured from operational and finance reporting before go-live. No targets set before a baseline exists.",
+    "data_collection_notes": "Confirm with the platform team which usage telemetry is instrumentable before go-live; service-desk categories need an adoption tag added."
+  }
+}

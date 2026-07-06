@@ -39,17 +39,17 @@ def audience_name(plan, ref):
 
 
 def coverage_for(impact_id, title, plan, threshold):
-    """Return list of covering entries (status != gap) that map to this impact."""
-    hits = []
+    """Return (covered_hits, gap_hits) — coverage rows mapping to this impact,
+    split by status. gap_hits are tracked gaps: an intended vehicle is named
+    but not yet built."""
+    hits, gap_hits = [], []
     ntitle = norm(title)
     for c in plan.get("coverage", []):
-        if str(c.get("status", "covered")).lower() == "gap":
-            continue
         by_id = c.get("impact_id") not in (None, "") and str(c.get("impact_id")) == str(impact_id)
         by_title = ntitle and difflib.SequenceMatcher(None, ntitle, norm(c.get("impact"))).ratio() >= threshold
         if by_id or by_title:
-            hits.append(c)
-    return hits
+            (gap_hits if str(c.get("status", "covered")).lower() == "gap" else hits).append(c)
+    return hits, gap_hits
 
 
 def write_xlsx(path, rows):
@@ -96,26 +96,37 @@ def build(cia, plan, outdir, project, threshold):
     pname = (project or {}).get("project_name", "Project")
 
     rows = []
-    gaps = 0
+    tracked_gaps = unmapped_gaps = 0
     for i, impact in enumerate(cia, 1):
         title = impact.get("title", f"Impact {i}")
-        hits = coverage_for(i, title, plan, threshold)
+        hits, gap_hits = coverage_for(i, title, plan, threshold)
         if hits:
             for c in hits:
                 rows.append({"impact": title,
                              "audience": audience_name(plan, c.get("audience", "")),
                              "vehicle": c.get("vehicle", ""),
                              "status": "Covered"})
+        elif gap_hits:
+            tracked_gaps += 1
+            for c in gap_hits:
+                rows.append({"impact": title,
+                             "audience": audience_name(plan, c.get("audience", "")),
+                             "vehicle": c.get("vehicle", ""),
+                             "status": "GAP"})
         else:
-            gaps += 1
+            unmapped_gaps += 1
             rows.append({"impact": title, "audience": "", "vehicle": "", "status": "GAP"})
 
+    gaps = tracked_gaps + unmapped_gaps
     path = outdir / f"{pname} Coverage Matrix.xlsx"
     write_xlsx(path, rows)
     print(f"Coverage Matrix -> {path}")
-    print(f"{len(cia)} impacts checked; {gaps} GAP(s) - impacts with no comm vehicle.")
+    print(f"{len(cia)} impacts checked; {gaps} GAP(s): "
+          f"{tracked_gaps} tracked gap(s) (intended vehicle named, not yet built) + "
+          f"{unmapped_gaps} unmapped impact(s) (no coverage row at all).")
     if gaps:
-        print("ESCALATE: uncovered impacts are the non-negotiable escalation trigger.")
+        print("ESCALATE: gap impacts are the non-negotiable escalation trigger "
+              "(tracked gaps need the vehicle built; unmapped impacts need a coverage decision).")
 
 
 def _guard(outdir, names, force):

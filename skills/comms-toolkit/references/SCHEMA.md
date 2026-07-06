@@ -34,7 +34,7 @@ One row per scheduled comm. This is the master grid and the calendar table.
 | Field | Notes |
 |---|---|
 | `week` | Integer week number (sequencing beat). |
-| `date` | Send/run date (`YYYY-MM-DD`). |
+| `date` | Send/run date (`YYYY-MM-DD`). If the program has no calendar anchor (only relative milestones like "Month 6"), agree a week-1 anchor date with the user; otherwise use week numbers in titles and a placeholder ISO date noted as a placeholder — never silently invent real dates. |
 | `audience` | An `audiences[].id` or name. |
 | `channel` | A `channels[].name`. |
 | `title` | The activity (e.g. "What's Changing Ep.1 — Awareness"). |

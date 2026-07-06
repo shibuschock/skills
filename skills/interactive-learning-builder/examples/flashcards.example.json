@@ -1,0 +1,15 @@
+{
+  "id": "pos-quickref-cards",
+  "title": "Acme POS Quick Recall — Microlearning",
+  "format": "flashcards",
+  "audience": "Frontline staff",
+  "module_ref": "pos-refunds-01",
+  "objectives": ["Recall key Acme POS steps and override rules"],
+  "items": [
+    {"front": "When does a refund need a manager override?", "back": "No receipt, above the shift threshold, or voiding after drawer close.", "hint": "Think higher-risk cases."},
+    {"front": "First step to refund with no receipt?", "back": "Start the refund, then request the manager override when prompted.", "hint": "Don't refuse, don't self-approve."},
+    {"front": "What does the override actually do?", "back": "Adds a second approval check on higher-risk transactions (a financial control)."},
+    {"front": "Standard refund, valid receipt, under threshold — override needed?", "back": "No — you can complete it yourself."},
+    {"front": "Where do you get help mid-shift if the override fails?", "back": "[CONFIRM: support path — e.g. shift lead, then help desk extension]."}
+  ]
+}

@@ -77,6 +77,11 @@ def main():
     for k in ("corp", "accent", "cyan", "card_bg", "card_br", "text_dk", "text_md", "text_lt", "font", "footer"):
         if k in cfg_brand:
             b[k] = cfg_brand[k]
+    # "magenta" is an alias for the accent color (HTML renderer uses it); explicit "accent" wins.
+    if "magenta" in cfg_brand and "accent" not in cfg_brand:
+        b["accent"] = cfg_brand["magenta"]
+    # python-pptx needs a single font name, not a CSS stack like "Calibri, system-ui, sans-serif".
+    b["font"] = b["font"].split(",")[0].strip().strip("'\"")
     NAVY, CORP, ACCENT, CYAN = rgb(b["navy"]), rgb(b["corp"]), rgb(b["accent"]), rgb(b["cyan"])
     CARDBG, CARDBR = rgb(b["card_bg"]), rgb(b["card_br"])
     TXTDK, TXTMD, WHITE = rgb(b["text_dk"]), rgb(b["text_md"]), RGBColor(0xFF, 0xFF, 0xFF)

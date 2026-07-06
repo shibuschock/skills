@@ -161,7 +161,7 @@ def build_html(bp, project, outdir):
     cards = "".join(
         f'<div class="gcard" style="border-top-color:{pri_color.get(g.get("priority",""),"#156082")}">'
         f'<div class="gh">{e(g.get("area"))}</div>'
-        f'<div class="gm"><span class="v">{e(g.get("impact_count"))}</span> impacts · '
+        f'<div class="gm"><span class="v">{e(g.get("impact_count"))}</span> impact{"" if g.get("impact_count") == 1 else "s"} · '
         f'<b style="color:{pri_color.get(g.get("priority",""),"#333")}">{e(g.get("priority"))}</b></div>'
         f'<div class="gr">{e(", ".join(g.get("rolls_up", [])))}</div>'
         f'<div class="gl">{e(g.get("lifecycle"))}</div></div>' for g in groups)
@@ -171,7 +171,7 @@ def build_html(bp, project, outdir):
 
     dim_rows = rows(bp.get("tom_dimensions", []), ["dimension", "current_state", "future_state_questions"])
     var_rows = rows(bp.get("value_at_risk", []), ["cluster", "benefit_at_risk", "why", "source_gap"])
-    ben_rows = rows(bp.get("benefits_register", []), ["benefit", "kpi", "baseline_source", "owner"])
+    ben_rows = rows(bp.get("benefits_register", []), ["benefit", "kpi", "baseline_source", "owner", "target", "timeline"])
     streams = "".join(f'<li><b>{e(v.get("name"))}</b>: {e(" → ".join(v.get("stages", [])))}</li>'
                       for v in bp.get("value_streams", []))
 
@@ -198,7 +198,7 @@ ul{{line-height:1.6}}footer{{text-align:center;color:var(--mut);font-size:.72rem
 {"<h2>Cross-functional value streams</h2><ul>"+streams+"</ul>" if streams else ""}
 <h2>TOM dimensions</h2><table><thead><tr><th>Dimension</th><th>Current state</th><th>Future-state questions</th></tr></thead><tbody>{dim_rows}</tbody></table>
 {"<h2>Value-at-risk</h2><table><thead><tr><th>Cluster</th><th>Benefit at risk</th><th>Why it matters</th><th>Source gap</th></tr></thead><tbody>"+var_rows+"</tbody></table>" if var_rows else ""}
-{"<h2>Benefits register</h2><table><thead><tr><th>Benefit</th><th>KPI</th><th>Baseline source</th><th>Owner</th></tr></thead><tbody>"+ben_rows+"</tbody></table>" if ben_rows else ""}
+{"<h2>Benefits register</h2><table><thead><tr><th>Benefit</th><th>KPI</th><th>Baseline source</th><th>Owner</th><th>Target</th><th>Timeline</th></tr></thead><tbody>"+ben_rows+"</tbody></table>" if ben_rows else ""}
 </div><footer>{e(b['footer'])}</footer></body></html>"""
     out = Path(outdir) / f"{pname} TOM Dashboard.html"; out.write_text(doc, encoding="utf-8"); return out
 

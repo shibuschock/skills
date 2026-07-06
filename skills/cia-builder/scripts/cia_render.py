@@ -262,7 +262,15 @@ function cell(d,c){
   if(c.kind==='mods')return listChips(v,'mod');
   if(c.kind==='stale')return v?'<span class="stale-flag">stale</span>':'';
   if(c.kind==='chip'&&v)return '<span class="chip" style="background:'+esc(c.color||'#888')+'">'+esc(v)+'</span>';
-  return esc(v).slice(0,c.clip||9999);
+  return clipTxt(v,c.clip||9999);
+}
+function clipTxt(v,n){
+  const s=String(v==null?'':v);
+  if(s.length<=n)return esc(s);
+  let t=s.slice(0,n);
+  const i=t.lastIndexOf(' ');
+  if(i>n*0.5)t=t.slice(0,i);
+  return esc(t.replace(/[\s,;:\-—]+$/,''))+'…';
 }
 function render(){
   const rows=filtered();

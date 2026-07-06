@@ -55,7 +55,13 @@ touches a terminal. Nothing is hardcoded to a client; everything drives off a sm
    Aim for reading grade **5–7**, sentences under ~25 words, no jargon/slop. Then route the
    draft through the `approval_gate` before it sends.
 
-7. **QA the dashboard.** Open the HTML (or headless-render it) and confirm the tabs render, the
+7. **Validate the chain.** Machine-check audience/channel references and CIA/SHA alignment:
+   ```
+   python3 scripts/validate_chain.py --comms comms_plan.json [--cia cia_records.json] [--sha sha_records.json]
+   ```
+   Fix every ERROR (unknown audience/channel references, coverage rows matching no CIA impact). Review WARNs.
+
+8. **QA the dashboard.** Open the HTML (or headless-render it) and confirm the tabs render, the
    calendar filters, the coverage tab highlights gaps in red, and the audience × channel matrix
    populates. Report where the files were written and the gap count.
 
@@ -69,3 +75,4 @@ touches a terminal. Nothing is hardcoded to a client; everything drives off a sm
   keep `coverage[].impact` titles aligned with CIA `title`s and `audiences[].name` aligned with
   SHA stakeholder-group names so the datasets don't drift.
 - Don't invent coverage, metrics, or dates. A tracked GAP is correct; fabricated coverage is a defect.
+- **Dates convention:** when the program has no calendar anchor (milestones are only relative, e.g. "Wave 1 — Month 6"), agree an anchor date for week 1 with the user, or schedule by week numbers in titles and put a placeholder ISO date with a note that it's a placeholder. Never silently invent real dates.

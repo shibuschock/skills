@@ -1,0 +1,152 @@
+{
+  "_README": "EXAMPLE rollout plan (fictional 'Acme ERP' program). Built from curriculum-architect/examples/curriculum.example.json — wave modules reference those module ids. No confirmed dates: everything anchors on weeks-before-go-live; multi-go-live spacing uses offset_weeks (GL-1 = 0).",
+  "go_lives": [
+    {"id": "GL-1", "label": "Acme ERP go-live — Phase 1 (Retail, Finance, Supply Chain HQ)", "business_units": ["Retail", "Finance", "Supply Chain"], "date": "", "offset_weeks": 0},
+    {"id": "GL-2", "label": "Acme ERP go-live — Phase 2 (remaining retail regions)", "business_units": ["Retail"], "date": "", "offset_weeks": 8}
+  ],
+  "waves": [
+    {
+      "id": "W0",
+      "name": "Super-user enablement (train-the-trainer)",
+      "go_live_ref": "GL-1",
+      "audiences": ["Super-users / champions (cross-BU)"],
+      "business_units": ["Retail", "Finance", "Supply Chain"],
+      "locations": ["PLACEHOLDER — confirm training sites"],
+      "modules": ["super-user-01"],
+      "delivery_mode": "ILT",
+      "headcount": "PLACEHOLDER — target 1 per 10 learners",
+      "start_weeks_before_golive": 6,
+      "end_weeks_before_golive": 4,
+      "notes": "Must complete before any population wave opens."
+    },
+    {
+      "id": "W1",
+      "name": "Supply chain planners — planning discipline",
+      "go_live_ref": "GL-1",
+      "audiences": ["Supply chain planners / inventory support"],
+      "business_units": ["Supply Chain"],
+      "modules": ["demand-planning-01", "demand-planning-02"],
+      "delivery_mode": "ILT + sandbox practice",
+      "headcount": "PLACEHOLDER",
+      "start_weeks_before_golive": 5,
+      "end_weeks_before_golive": 2,
+      "sessions": [
+        {"module": "demand-planning-01", "audience": "Supply chain planners / inventory support", "format": "ILT half-day", "facilitator": "PLACEHOLDER", "notes": "Avoid peak planning season"},
+        {"module": "demand-planning-02", "audience": "Supply chain planners / inventory support", "format": "ILT full-day + 2 supervised sandbox cycles", "facilitator": "PLACEHOLDER", "notes": "Super-user coaches assigned per cohort"}
+      ],
+      "notes": "Longest runway — net-new discipline, largest gap."
+    },
+    {
+      "id": "W2",
+      "name": "Finance analysts — automated posting",
+      "go_live_ref": "GL-1",
+      "audiences": ["Finance analysts"],
+      "business_units": ["Finance"],
+      "modules": ["fin-recon-01"],
+      "delivery_mode": "VILT",
+      "headcount": "PLACEHOLDER",
+      "start_weeks_before_golive": 3,
+      "end_weeks_before_golive": 2,
+      "notes": "Schedule outside the month-end close window."
+    },
+    {
+      "id": "W3",
+      "name": "Retail team leads — replenishment confidence",
+      "go_live_ref": "GL-1",
+      "audiences": ["Team leads / supervisors"],
+      "business_units": ["Retail"],
+      "modules": ["replen-trust-01"],
+      "delivery_mode": "In-app + coaching huddles",
+      "headcount": "PLACEHOLDER",
+      "start_weeks_before_golive": 3,
+      "end_weeks_before_golive": 1,
+      "notes": "Coaching band continues past go-live (mindset-driven need)."
+    },
+    {
+      "id": "W4",
+      "name": "Retail frontline — POS ready",
+      "go_live_ref": "GL-1",
+      "audiences": ["Frontline staff (store / floor / counter)"],
+      "business_units": ["Retail"],
+      "modules": ["pos-refunds-01"],
+      "delivery_mode": "In-app at the terminal",
+      "headcount": "PLACEHOLDER — confirm frontline headcount",
+      "start_weeks_before_golive": 2,
+      "end_weeks_before_golive": 0,
+      "notes": "On-shift delivery; last so it's fresh at go-live. Requires in-app guidance overlay built by GL−2 wks."
+    },
+    {
+      "id": "W5",
+      "name": "Phase 2 super-user enablement (train-the-trainer)",
+      "go_live_ref": "GL-2",
+      "audiences": ["Super-users / champions (Phase 2 retail regions)"],
+      "business_units": ["Retail"],
+      "modules": ["super-user-01"],
+      "delivery_mode": "ILT",
+      "headcount": "PLACEHOLDER — target 1 per 10 learners",
+      "start_weeks_before_golive": 6,
+      "end_weeks_before_golive": 4,
+      "notes": "Super-users-first applies per go-live: must complete before any Phase 2 population wave opens."
+    },
+    {
+      "id": "W6",
+      "name": "Phase 2 retail frontline — POS ready",
+      "go_live_ref": "GL-2",
+      "audiences": ["Frontline staff (store / floor / counter)"],
+      "business_units": ["Retail"],
+      "modules": ["pos-refunds-01"],
+      "delivery_mode": "In-app at the terminal",
+      "headcount": "PLACEHOLDER — confirm Phase 2 frontline headcount",
+      "start_weeks_before_golive": 2,
+      "end_weeks_before_golive": 0,
+      "notes": "Same on-shift pattern as W4, anchored to GL-2."
+    }
+  ],
+  "super_user_plan": {
+    "selection_criteria": "Respected peer, strong on current process, volunteers preferred over voluntolds; coverage across all BUs and shifts.",
+    "track": "super-user-01",
+    "role_at_golive": "Floor/desk support during cutover week; first escalation point before the help desk.",
+    "role_after": "Local coaching (the 20% social band), new-hire onboarding support, feedback channel into the CIA update loop.",
+    "ratio": "1 super-user per 10 learners (PLACEHOLDER — confirm)"
+  },
+  "comms_touchpoints": [
+    {"timing": "GL−3 wks", "audience": "All impacted staff", "message": "Your training is coming — what, when, and why it matters", "channel": "Manager huddles + intranet"},
+    {"timing": "GL−1 wk", "audience": "All impacted staff", "message": "Your schedule + any pre-work", "channel": "Manager huddles; printed schedule for no-email frontline"},
+    {"timing": "GL", "audience": "All impacted staff", "message": "You're go-live ready — where to get help (super-users, job aids, help desk)", "channel": "Floor posters + huddles"}
+  ],
+  "readiness_criteria": [
+    {"audience": "Frontline staff (store / floor / counter)", "criteria": ["POS task check passed (both refund types unassisted)", "System access granted"], "gate": "Must pass before floor access at go-live"},
+    {"audience": "Team leads / supervisors", "criteria": ["Review-adjust-approve workflow completed in sandbox", "Two coaching huddles attended"], "gate": "Counted ready when observation criteria on track"},
+    {"audience": "Supply chain planners / inventory support", "criteria": ["Scenario assessment passed (4 of 5 seeded exceptions)", "Two supervised sandbox cycles completed"], "gate": "Must pass before running a live cycle unsupervised"},
+    {"audience": "Finance analysts", "criteria": ["Sandbox day reconciled unassisted", "Exception routing correct"], "gate": "Ready for first live close with peer review"}
+  ],
+  "program_gates": [
+    {"gate": "Sponsor message on why replenishment suggestions are trusted (comms, not training)", "source_need": "replen-trust-01", "blocks": ["W3"]},
+    {"gate": "Override-accountability decision confirmed with Ops leadership", "source_need": "replen-trust-01", "blocks": ["W3"]}
+  ],
+  "site_gates": [
+    {"site": "PLACEHOLDER — Phase 2 retail regions", "gates": ["In-app guidance overlay deployed to Phase 2 terminals", "Store network/hardware readiness confirmed"], "source_need": ""}
+  ],
+  "deferred_modules": [
+    {"module": "replen-trust-01", "reason": "Phase 2 team-lead cohort deferred until the override-accountability decision (non-training gate) clears — Phase 1 cohort runs in W3 as planned."}
+  ],
+  "measurement": [
+    {"level": "L1", "label": "Reaction", "metric": "Usefulness + confidence rating", "method": "Post-session pulse (2 questions)", "owner": "L&D", "timing": "At each session", "value_lever": ""},
+    {"level": "L2", "label": "Learning", "metric": "Assessment pass rate per module", "method": "Curriculum assessments (task check / scenario / quiz / observation)", "owner": "Facilitator", "timing": "At each session", "value_lever": ""},
+    {"level": "L3", "label": "Behavior", "metric": "System use vs. workaround (refunds in POS, suggestions approved vs. overridden, cycles run on time)", "method": "System usage data + super-user observation", "owner": "Ops + L&D", "timing": "GL+2 / +4 / +8 wks", "value_lever": "Stockout reduction"},
+    {"level": "L4", "label": "Results", "metric": "Stockout rate; inventory turns; days to close", "method": "Business data vs. baseline (baselines PLACEHOLDER — confirm with benefit owners)", "owner": "Benefit owners", "timing": "GL+ per benefit cadence", "value_lever": "Stockout reduction; Inventory efficiency"}
+  ],
+  "reinforcement": [
+    {"timing": "GL+2 wks", "activity": "Spaced microlearning: refund edge cases + exception triage refresher", "audience": "Frontline; Finance analysts", "owner": "L&D"},
+    {"timing": "GL+4 wks", "activity": "Super-user community of practice — first retro; harvest issues into the CIA update loop", "audience": "Super-users / champions", "owner": "Change team"},
+    {"timing": "GL+8 wks", "activity": "Override-pattern review with team leads; targeted coaching where trust lags", "audience": "Team leads / supervisors", "owner": "Ops + L&D"},
+    {"timing": "Ongoing", "activity": "New-hire onboarding path (critical for high-turnover frontline); job-aid upkeep owned by L&D", "audience": "New hires", "owner": "L&D"}
+  ],
+  "risks_assumptions": [
+    "Sandbox environment must be ready by GL−7 wks or the experiential 70% band slips (dependency flag).",
+    "In-app guidance overlay must be built by GL−2 wks for the frontline wave.",
+    "Headcounts, locations, and facilitator names are PLACEHOLDER — confirm before scheduling.",
+    "Peak planning season may compress the planner window — confirm the season calendar.",
+    "GL-2 offset (GL-1 + 8 weeks) is planning spacing, not a confirmed date — re-anchor if the phase plan moves."
+  ]
+}

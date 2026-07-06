@@ -9,8 +9,9 @@
 | `location` | rec. | Site/location (e.g. "HQ", "Plant", or "Both"). |
 | `category` | rec. | Grouping (e.g. "Operations Leadership", "Finance"). |
 | `group_description` | yes | What the group does, size, where based. |
-| `influence` | yes | 1–5 — power to affect the change's success. |
-| `interest` | yes | 1–5 — how much the change affects them / their stake. |
+| `influence` | yes* | 1–5 — power to affect the change's success. |
+| `interest` | yes* | 1–5 — how much the change affects them / their stake. |
+| `assessment_status` | cond. | \*Set to `"Not yet assessed"` to record an identified group **without** `influence`/`interest` (e.g. no interview coverage yet). Required whenever those scores are absent; the validator errors on missing scores only when this field is also absent. Unassessed groups appear in the table/xlsx and in a "Pending assessment" list under the grid — they are not plotted as dots. |
 | `influence_rationale` / `interest_rationale` | rec. | Why those ratings. |
 | `impact_from_change` | rec. | How their work changes. |
 | `impact_rationale` | opt. | Why. |

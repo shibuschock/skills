@@ -11,13 +11,13 @@ This skill is **conversational**: gather what you need in plain language, write 
 
 ## Workflow
 
-1. **Gather the project basics** (ask only for what's missing): project name, business units, locations, and — if the user has brand preferences — colors/font/footer. Ask where their transcripts live and where they want the outputs. Then **write `project.json`** yourself (use `examples/project.example.json` as the shape). Include the optional `tom_shifts` / `benefits` / `training` blocks only if the engagement actually uses those layers.
+1. **Gather the project basics** (ask only for what's missing): project name, business units, locations, and — if the user has brand preferences — colors/font/footer. The `brand` keys `navy` and `magenta` are **semantic slots** (`navy` = primary color, `magenta` = accent), not color requirements — put any brand's hex values there (e.g. teal in `navy`, orange in `magenta`). Ask where their transcripts live and where they want the outputs. Then **write `project.json`** yourself (use `examples/project.example.json` as the shape). Include the optional `tom_shifts` / `benefits` / `training` blocks only if the engagement actually uses those layers.
 
 2. **Read the references before extracting** (they define every field and rule):
    - `references/CIA_SCHEMA.md` — record fields (core + optional).
    - `references/METHODOLOGY.md` — the 6 Change Dimensions (MECE), scoring, scope, optional layers.
 
-3. **Extract the impacts.** Read the current/future-state transcripts and write `cia_records.json` — one object per distinct **change impact** (a current→future change to how people work). Apply the rules: tag every dimension that materially applies and pick exactly one **Primary**; Skills ≠ tool training; score severity/complexity 1–5 only where the session supports it; populate optional fields only where the transcript backs them. **Do not fabricate — a blank is correct, an invented value is a defect.** For large transcript sets, split across subagents (Agent tool), each returning a JSON chunk against the schema; then merge and validate (every record has the required fields; the Primary is within `dimensions`).
+3. **Extract the impacts.** Read the current/future-state transcripts and write `cia_records.json` — one object per distinct **change impact** (a current→future change to how people work). Apply the rules: tag every dimension that materially applies and pick exactly one **Primary**; Skills ≠ tool training; **score severity/complexity/priority yourself from the transcript evidence, with a one-line rationale** — that analyst judgment is the default, exactly like influence/interest in the SHA; leave a score blank only when the evidence is genuinely too thin to judge, not just because the client never said a number. Downstream skills (intensity map, adoption-metrics coverage, playbook GAP checks, persona tiering) depend on these scores — an unscored CIA silently degrades them. Populate optional fields only where the transcript backs them. **Do not fabricate facts, metrics, or quotes — a blank is correct, an invented value is a defect.** (Quoting a number the client stated in a session is sourcing, not fabrication.) For large transcript sets, split across subagents (Agent tool), each returning a JSON chunk against the schema; then merge and validate (every record has the required fields; the Primary is within `dimensions`).
 
 4. **Render** (run it yourself; `python3`, or `python` on Windows):
    ```
@@ -28,7 +28,13 @@ This skill is **conversational**: gather what you need in plain language, write 
 
 5. **Update later (incremental).** When new transcripts arrive, don't rebuild — follow `references/UPDATE_LOOP.md`: extract just the new records, merge them into the existing `cia_records.json` with `scripts/cia_merge.py`, then re-render. Keep `cia_records.json` as the canonical dataset between runs.
 
-6. **QA.** Open the HTML (or headless-render it) and confirm the tabs/filters work, rows expand to detail, and the tiles drill into the register. Spot-check a few records against the transcript. Report where the files were written.
+6. **Validate.** Before rendering (and after any merge), run the schema/chain validator:
+   ```
+   python3 scripts/validate_chain.py --cia cia_records.json [--sha sha_records.json] [--comms comms_plan.json]
+   ```
+   Fix every ERROR (missing required fields, bad enums, scores outside 1–5, Primary not in `dimensions`). Review WARNs — role↔stakeholder-group mismatches mean the CIA and SHA datasets are drifting.
+
+7. **QA.** Open the HTML (or headless-render it) and confirm the tabs/filters work, rows expand to detail, and the tiles drill into the register. Spot-check a few records against the transcript. Report where the files were written.
 
 ## Notes
 - **Won't overwrite:** re-running refuses to clobber existing outputs in `--outdir`; pass `--force` to regenerate (e.g. after an incremental update).

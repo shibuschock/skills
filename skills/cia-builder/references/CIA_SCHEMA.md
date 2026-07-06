@@ -13,7 +13,7 @@
 | `process_change` | yes | One-sentence summary of the shift. |
 | `roles_impacted` | yes | Comma/semicolon list of roles affected. |
 | `role_changes` | opt. | Object `{ "Role": {"desc": "...", "evidence": "workshop"} }` or `{ "Role": "desc" }` — per-role responsibility delta. |
-| `severity` | rec. | 1–5 (magnitude for affected roles). Leave blank if unscored. |
+| `severity` | rec. | 1–5 (magnitude for affected roles). Analyst-scored from transcript evidence (see METHODOLOGY.md); blank only when evidence is too thin to judge. |
 | `complexity` | rec. | 1–5 (how hard the change is). |
 | `priority` | rec. | Critical / High / Medium / Low. |
 | `sentiment` | opt. | Positive / Mixed / Neutral / Negative / Cautious. |

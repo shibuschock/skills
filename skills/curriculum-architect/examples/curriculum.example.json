@@ -1,0 +1,172 @@
+{
+  "_README": "EXAMPLE curriculum (fictional 'Acme ERP' program). Built from training-needs-builder/examples/training_needs.example.json — maps_to_needs references those TN ids.",
+  "learning_paths": [
+    {
+      "path_name": "Frontline — Go-Live Ready",
+      "audience": "Frontline staff (store / floor / counter)",
+      "business_unit": "Retail",
+      "sequence": ["pos-refunds-01"],
+      "target_proficiency": "Competent"
+    },
+    {
+      "path_name": "Team Leads — Replenishment Confidence",
+      "audience": "Team leads / supervisors",
+      "business_unit": "Retail",
+      "sequence": ["replen-trust-01"],
+      "target_proficiency": "Competent"
+    },
+    {
+      "path_name": "Planners — Demand Planning Discipline",
+      "audience": "Supply chain planners / inventory support",
+      "business_unit": "Supply Chain",
+      "sequence": ["demand-planning-01", "demand-planning-02"],
+      "target_proficiency": "Proficient"
+    },
+    {
+      "path_name": "Finance — Automated Posting & Reconciliation",
+      "audience": "Finance analysts",
+      "business_unit": "Finance",
+      "sequence": ["fin-recon-01"],
+      "target_proficiency": "Proficient"
+    },
+    {
+      "path_name": "Super-Users — Train-the-Trainer",
+      "audience": "Super-users / champions (cross-BU)",
+      "business_unit": "Retail; Finance; Supply Chain",
+      "sequence": ["super-user-01"],
+      "target_proficiency": "Proficient"
+    }
+  ],
+  "modules": [
+    {
+      "id": "pos-refunds-01",
+      "title": "Refunds & Overrides at the POS",
+      "audience": "Frontline staff (store / floor / counter)",
+      "learning_objectives": [
+        {"text": "By the end, the learner can process a standard refund at the POS without assistance.", "bloom_level": "Apply", "capability_ref": "TN-01"},
+        {"text": "By the end, the learner can trigger and complete a manager-override refund correctly.", "bloom_level": "Apply", "capability_ref": "TN-01"}
+      ],
+      "duration_minutes": 45,
+      "modality_blend": {
+        "experiential": "In-app guided refund walkthroughs at the terminal during shift (sandbox mode)",
+        "social": "Shift-lead shadowing on first three live refunds",
+        "formal": "5-minute microlearning + one-page job aid at the register"
+      },
+      "prerequisites": [],
+      "content_outline": ["Refund types and when override is required", "Guided walkthrough: standard refund", "Guided walkthrough: manager override", "Where to get help"],
+      "assessment": {"type": "task check", "mastery_threshold": "Completes both refund types unassisted in sandbox", "kirkpatrick_level": "L2"},
+      "maps_to_needs": ["TN-01"],
+      "maps_to_impacts": ["New POS refund/override workflow"]
+    },
+    {
+      "id": "replen-trust-01",
+      "title": "Working with Automated Replenishment",
+      "audience": "Team leads / supervisors",
+      "learning_objectives": [
+        {"text": "By the end, the learner can review, adjust, and approve system-generated replenishment suggestions.", "bloom_level": "Apply", "capability_ref": "TN-03"},
+        {"text": "By the end, the learner can explain when to override a suggestion and document why.", "bloom_level": "Understand", "capability_ref": "TN-03"}
+      ],
+      "duration_minutes": 90,
+      "modality_blend": {
+        "experiential": "Two weeks of live suggestion reviews with override journaling",
+        "social": "Manager-led coaching huddles comparing overrides vs. outcomes (primary band — mindset-driven need)",
+        "formal": "In-app guidance + exception-handling job aid"
+      },
+      "blend_weights": {"experiential": 40, "social": 45, "formal": 15},
+      "non_training_gates": ["Sponsor message on why suggestions are trusted (comms, not training)", "Override-accountability decision confirmed with Ops leadership"],
+      "prerequisites": [],
+      "content_outline": ["Why the system suggests what it suggests", "Review-adjust-approve workflow", "Legitimate override scenarios", "What happens to ignored suggestions"],
+      "assessment": {"type": "observation", "mastery_threshold": "Two consecutive weeks with documented, defensible overrides only", "kirkpatrick_level": "L3"},
+      "maps_to_needs": ["TN-03"],
+      "maps_to_impacts": ["Automated replenishment replacing manual reorder spreadsheets"]
+    },
+    {
+      "id": "demand-planning-01",
+      "title": "Demand Planning Foundations",
+      "audience": "Supply chain planners / inventory support",
+      "learning_objectives": [
+        {"text": "By the end, the learner can describe each step of the Acme ERP demand-planning cycle and its inputs.", "bloom_level": "Understand", "capability_ref": "TN-02"},
+        {"text": "By the end, the learner can navigate the planning module and locate forecast, history, and exception views.", "bloom_level": "Apply", "capability_ref": "TN-02"}
+      ],
+      "duration_minutes": 240,
+      "modality_blend": {
+        "experiential": "Sandbox navigation labs with real (anonymized) history data",
+        "social": "Cohort discussion: how today's manual process maps to the new cycle",
+        "formal": "ILT session on planning concepts and module structure"
+      },
+      "prerequisites": [],
+      "content_outline": ["Planning cycle overview", "Data inputs and where they come from", "Module navigation lab", "From spreadsheet habits to system discipline"],
+      "assessment": {"type": "quiz", "mastery_threshold": "80% on cycle-and-navigation quiz", "kirkpatrick_level": "L2"},
+      "maps_to_needs": ["TN-02"],
+      "maps_to_impacts": ["Demand planning introduced as net-new capability"]
+    },
+    {
+      "id": "demand-planning-02",
+      "title": "Running the Demand-Planning Cycle",
+      "audience": "Supply chain planners / inventory support",
+      "learning_objectives": [
+        {"text": "By the end, the learner can execute a full demand-planning cycle end to end in the planning module.", "bloom_level": "Apply", "capability_ref": "TN-02"},
+        {"text": "By the end, the learner can analyze forecast exceptions and choose the correct resolution.", "bloom_level": "Analyze", "capability_ref": "TN-02"}
+      ],
+      "duration_minutes": 480,
+      "modality_blend": {
+        "experiential": "Two supervised practice cycles in sandbox, then first live cycle with super-user support",
+        "social": "Super-user coaching through the first two live cycles",
+        "formal": "Scenario-based ILT: exception patterns and resolutions"
+      },
+      "prerequisites": ["demand-planning-01"],
+      "content_outline": ["Cycle execution end to end", "Exception triage scenarios", "Supervised practice cycles", "First-live-cycle support plan"],
+      "assessment": {"type": "scenario", "mastery_threshold": "Completes a full sandbox cycle with correct resolution of 4 of 5 seeded exceptions", "kirkpatrick_level": "L2"},
+      "maps_to_needs": ["TN-02"],
+      "maps_to_impacts": ["Demand planning introduced as net-new capability"]
+    },
+    {
+      "id": "fin-recon-01",
+      "title": "Automated Posting & Daily Reconciliation",
+      "audience": "Finance analysts",
+      "learning_objectives": [
+        {"text": "By the end, the learner can reconcile daily store sales to the GL using the automated posting reports.", "bloom_level": "Apply", "capability_ref": "TN-04"},
+        {"text": "By the end, the learner can analyze posting exceptions and route them to the correct resolution path.", "bloom_level": "Analyze", "capability_ref": "TN-04"}
+      ],
+      "duration_minutes": 180,
+      "modality_blend": {
+        "experiential": "Reconcile three days of sandbox postings, including seeded exceptions",
+        "social": "Peer review of exception decisions with a senior analyst",
+        "formal": "VILT walkthrough + reconciliation job aid"
+      },
+      "prerequisites": [],
+      "content_outline": ["What changed: manual journals retired", "The automated posting flow", "Daily reconciliation routine", "Exception triage and escalation"],
+      "assessment": {"type": "task check", "mastery_threshold": "Reconciles one sandbox day unassisted, all exceptions routed correctly", "kirkpatrick_level": "L2"},
+      "maps_to_needs": ["TN-04"],
+      "maps_to_impacts": ["Store sales posting automated to GL; manual journal entries retired"]
+    },
+    {
+      "id": "super-user-01",
+      "title": "Super-User Deep Dive & Train-the-Trainer",
+      "audience": "Super-users / champions (cross-BU)",
+      "learning_objectives": [
+        {"text": "By the end, the learner can perform every frontline, lead, planner, and analyst task in their BU's scope.", "bloom_level": "Apply", "capability_ref": "TN-01"},
+        {"text": "By the end, the learner can coach a colleague through a task using the ask-show-watch method.", "bloom_level": "Apply", "capability_ref": "TN-03"},
+        {"text": "By the end, the learner can evaluate a colleague's exception decision and give corrective feedback.", "bloom_level": "Evaluate", "capability_ref": "TN-02"}
+      ],
+      "duration_minutes": 600,
+      "modality_blend": {
+        "experiential": "Full task circuit across their BU's modules in sandbox",
+        "social": "Practice coaching sessions with peer feedback",
+        "formal": "Train-the-trainer workshop + facilitator kit"
+      },
+      "prerequisites": [],
+      "content_outline": ["BU task circuit", "Coaching method", "Go-live floor-support playbook", "Post-go-live community rhythm"],
+      "assessment": {"type": "observation", "mastery_threshold": "Delivers one observed coaching session rated ready by the facilitator", "kirkpatrick_level": "L2"},
+      "maps_to_needs": ["TN-01", "TN-02", "TN-03", "TN-04"],
+      "maps_to_impacts": ["New POS refund/override workflow", "Demand planning introduced as net-new capability", "Automated replenishment replacing manual reorder spreadsheets", "Store sales posting automated to GL; manual journal entries retired"],
+      "super_user_track": true
+    }
+  ],
+  "assessment_plan": {
+    "approach": "Backward design: objectives written first, assessments designed against them, content outlined last. Every module assessment gates mastery before the learner is counted go-live ready.",
+    "levels": "L1 reaction via post-session pulse; L2 learning via the module assessments above; L3 behavior via replen-trust-01 observation and post-go-live usage checks; L4 results via the rollout measurement plan tied to CIA value levers.",
+    "mastery_policy": "Frontline must pass the POS task check before floor access at go-live. Planners must pass the scenario assessment before running a live cycle unsupervised.",
+    "ties_to_value": "L4 links to the CIA value levers: stockout reduction (replenishment adoption), inventory efficiency (planning cycle quality), close-cycle time (automated posting adoption)."
+  }
+}

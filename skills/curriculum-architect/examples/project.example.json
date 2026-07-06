@@ -1,0 +1,11 @@
+{
+  "project_name": "Acme ERP",
+  "business_units": ["Retail", "Finance", "Supply Chain"],
+  "locations": ["PLACEHOLDER"],
+  "brand": {
+    "navy": "#162B75",
+    "magenta": "#EE2C81",
+    "font": "Calibri, system-ui, sans-serif",
+    "footer": "Acme — Confidential"
+  }
+}

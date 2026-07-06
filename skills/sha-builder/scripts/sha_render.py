@@ -84,6 +84,8 @@ def normalize_sha(records):
             "category": g(r, "category"),
             "description": g(r, "group_description", "description"),
             "influence": infl if infl is not None else "", "interest": inte if inte is not None else "",
+            "quadrant": quad,
+            "assessment_status": g(r, "assessment_status"),
             "influence_rationale": g(r, "influence_rationale"),
             "interest_rationale": g(r, "interest_rationale"),
             "impact_from_change": g(r, "impact_from_change"),
@@ -252,7 +254,15 @@ function cell(d,c){
   if(c.kind==='mods')return listChips(v,'mod');
   if(c.kind==='stale')return v?'<span class="stale-flag">stale</span>':'';
   if(c.kind==='chip'&&v)return '<span class="chip" style="background:'+esc(c.color||'#888')+'">'+esc(v)+'</span>';
-  return esc(v).slice(0,c.clip||9999);
+  return clipTxt(v,c.clip||9999);
+}
+function clipTxt(v,n){
+  const s=String(v==null?'':v);
+  if(s.length<=n)return esc(s);
+  let t=s.slice(0,n);
+  const i=t.lastIndexOf(' ');
+  if(i>n*0.5)t=t.slice(0,i);
+  return esc(t.replace(/[\s,;:\-—]+$/,''))+'…';
 }
 function render(){
   const rows=filtered();
@@ -379,9 +389,22 @@ function drawGrid(){
   if(!CONFIG.grid)return;const el=$('#grid');if(!el||el.dataset.done)return;el.dataset.done=1;
   el.insertAdjacentHTML('beforeend','<div class="q" style="left:0;top:0">'+CONFIG.grid.q.tl+'</div><div class="q" style="right:0;top:0;text-align:right;justify-content:flex-end">'+CONFIG.grid.q.tr+'</div><div class="q" style="left:0;bottom:0;align-items:flex-end">'+CONFIG.grid.q.bl+'</div><div class="q" style="right:0;bottom:0;align-items:flex-end;justify-content:flex-end">'+CONFIG.grid.q.br+'</div>');
   el.insertAdjacentHTML('beforeend','<div class="axis" style="left:50%;bottom:-18px;transform:translateX(-50%)">Interest →</div><div class="axis" style="left:-6px;top:50%;transform:rotate(-90deg);transform-origin:left">Influence →</div>');
-  DATA.forEach(d=>{const x=d[CONFIG.grid.x],y=d[CONFIG.grid.y];if(!x||!y)return;
-    const dot=document.createElement('div');dot.className='dot';dot.style.left=((x-1)/4*100)+'%';dot.style.bottom=((y-1)/4*100)+'%';
-    dot.title=d[CONFIG.grid.label]+' (Infl '+y+', Int '+x+')';el.appendChild(dot);});
+  // group co-located dots per (x,y) cell and apply a small deterministic jitter so every group stays discoverable
+  const cells={};
+  DATA.forEach(d=>{const x=d[CONFIG.grid.x],y=d[CONFIG.grid.y];if(!x||!y)return;const k=x+'_'+y;(cells[k]=cells[k]||[]).push(d);});
+  Object.values(cells).forEach(list=>list.forEach((d,i)=>{
+    const x=d[CONFIG.grid.x],y=d[CONFIG.grid.y];
+    const ang=i*2.399963, r=7*Math.sqrt(i); // golden-angle spiral, px offsets, deterministic
+    const dx=r*Math.cos(ang), dy=r*Math.sin(ang);
+    const dot=document.createElement('div');dot.className='dot';
+    dot.style.left='calc('+((x-1)/4*100)+'% + '+dx.toFixed(1)+'px)';
+    dot.style.bottom='calc('+((y-1)/4*100)+'% + '+dy.toFixed(1)+'px)';
+    dot.title=d[CONFIG.grid.label]+' (Infl '+y+', Int '+x+')'+(list.length>1?' — '+list.length+' groups at this point':'');
+    el.appendChild(dot);}));
+  // groups identified but not yet assessed render as a list, not as dots
+  const pend=DATA.filter(d=>!d[CONFIG.grid.x]||!d[CONFIG.grid.y]);
+  if(pend.length&&!document.getElementById('grid-pending'))
+    el.insertAdjacentHTML('afterend','<div id="grid-pending" class="pv-note" style="max-width:620px;margin:6px 0 14px"><b>Pending assessment ('+pend.length+'):</b> '+pend.map(d=>esc(d[CONFIG.grid.label])).join('; ')+'</div>');
 }
 buildBar();buildTabs();renderPivots();render();
 </script></body></html>"""
@@ -408,6 +431,7 @@ def build_sha(records, project, outdir):
     cols = [("id", "ID", 6), ("group", "Stakeholder Group / Role", 30), ("business_unit", "Business Unit", 16),
             ("location", "Location", 14), ("category", "Category", 22), ("description", "Group Description", 46),
             ("influence", "Influence", 10), ("interest", "Interest", 10),
+            ("assessment_status", "Assessment Status", 18),
             ("influence_rationale", "Influence Rationale", 36), ("interest_rationale", "Interest Rationale", 36),
             ("impact_from_change", "Impact from Change", 36), ("decision_authority", "Decision Authority", 30),
             ("sentiment", "Current Sentiment", 16), ("pain_points", "Key Pain Points", 36),
@@ -427,8 +451,9 @@ def build_sha(records, project, outdir):
                     {"key": "category", "label": "All Categories"}, {"key": "influence", "label": "All Influence"}],
         "stats": [{"label": "Stakeholders", "type": "count"}, {"label": "Business Units", "type": "distinct", "key": "business_unit"},
                   {"label": "High Influence (5)", "countifKey": "influence", "countifVal": "5"},
-                  {"label": "Manage Closely", "type": "countif", "countifKey": "engagement", "countifVal": "Manage Closely"}],
-        "detail": [{"label": "Group Description", "key": "description"}, {"label": "Influence Rationale", "key": "influence_rationale"},
+                  {"label": "Manage Closely", "type": "countif", "countifKey": "quadrant", "countifVal": "Manage Closely"}],
+        "detail": [{"label": "Group Description", "key": "description"}, {"label": "Assessment Status", "key": "assessment_status"},
+                   {"label": "Influence Rationale", "key": "influence_rationale"},
                    {"label": "Interest Rationale", "key": "interest_rationale"}, {"label": "Impact from Change", "key": "impact_from_change"},
                    {"label": "Decision Authority", "key": "decision_authority"}, {"label": "Key Pain Points", "key": "pain_points"},
                    {"label": "Communication Preferences", "key": "comms"}, {"label": "Engagement Strategy", "key": "engagement"},

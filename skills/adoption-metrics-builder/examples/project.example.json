@@ -1,0 +1,19 @@
+{
+  "project_name": "Acme ERP",
+  "business_units": ["Retail", "Finance", "Supply Chain"],
+  "locations": ["HQ", "Plant"],
+  "phases": ["Phase 0", "Design", "Build", "Deploy", "Hypercare"],
+  "brand": {
+    "navy": "#162B75",
+    "magenta": "#EE2C81",
+    "font": "Calibri, system-ui, sans-serif",
+    "footer": "Acme — Confidential"
+  },
+
+  "_note": "Optional: a benefits list (same shape as cia-builder's project.json) adds levers to the coverage view even if no CIA record carries them. Remove this key.",
+  "benefits": [
+    {"benefit": "Stockout reduction", "description": "Fewer lost sales from out-of-stocks."},
+    {"benefit": "Inventory efficiency", "description": "Lower working capital tied up in inventory."},
+    {"benefit": "Markdown avoidance", "description": "Better assortment planning reduces forced markdowns."}
+  ]
+}

@@ -232,7 +232,8 @@ function render(){
 }
 function buildStats(){
   const gaps=COV.filter(c=>c.status==='gap').length;
-  const cards=[['Activities',DATA.length,''],['Audiences',distinct('audience').length,''],
+  const nAudDef=(PLAN.audiences||[]).length;
+  const cards=[['Activities',DATA.length,''],['Audiences used',distinct('audience').length+(nAudDef?' of '+nAudDef:''),''],
     ['Channels',distinct('channel').length,''],['Coverage Gaps',gaps,gaps>0?'gap':'']];
   $('#stats').innerHTML=cards.map(c=>'<div class="card '+c[2]+'"><div class="v">'+c[1]+'</div><div class="l">'+esc(c[0])+'</div></div>').join('');
 }

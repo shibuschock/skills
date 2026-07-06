@@ -21,7 +21,8 @@ You may write specific tactics in `engagement_strategy`; the renderer fixes the 
 
 ## Scoring discipline
 - Rate Influence and Interest from evidence in the transcript, with a one-line rationale for each where possible.
-- **No fabricated ratings:** if a group's influence/interest wasn't discussed, note it as a follow-up rather than inventing a score.
+- **Interest measures objective stake, not engagement.** Interest = how much the change affects them. A disengaged-but-heavily-impacted stakeholder ("this doesn't touch me," but Wave 3 rewires their function) scores **high** Interest; capture the disengagement in `current_sentiment` and the rationale/notes. Don't let low enthusiasm drag down an objectively high stake.
+- **No fabricated ratings — but don't drop the group.** If a group's influence/interest genuinely can't be judged from the evidence (e.g. zero interview coverage), keep the record, omit the scores, and set `assessment_status: "Not yet assessed"` plus a `follow_up_needed` action. The group stays visible in the register and in the grid tab's "Pending assessment" list instead of disappearing.
 - **Sentiment**: Positive / Mixed / Neutral / Negative / Cautious — the group's current disposition toward the change.
 
 ## What good stakeholder records include

@@ -1,0 +1,47 @@
+{
+  "id": "pos-refunds-quiz",
+  "title": "Acme POS: Refunds & Overrides — Knowledge Check",
+  "format": "quiz",
+  "audience": "Frontline staff",
+  "module_ref": "pos-refunds-01",
+  "objectives": [
+    "Process a refund with manager override in Acme POS",
+    "Decide when a manager override is required"
+  ],
+  "pass_threshold": 0.8,
+  "items": [
+    {
+      "type": "single",
+      "bloom": "Apply",
+      "question": "A customer wants a refund but has no receipt. What do you do first?",
+      "options": [
+        {"text": "Issue the refund right away to keep the customer happy", "correct": false, "feedback": "No-receipt refunds need a manager override — issuing it yourself skips a required control."},
+        {"text": "Start the refund and request a manager override when prompted", "correct": true, "feedback": "Correct — the system flags no-receipt refunds for override; start it and call the manager."},
+        {"text": "Tell the customer refunds are not possible without a receipt", "correct": false, "feedback": "Refunds are still possible — they just require an override, not a refusal."}
+      ]
+    },
+    {
+      "type": "multiple",
+      "bloom": "Apply",
+      "question": "Which situations require a manager override? (Select all that apply.)",
+      "options": [
+        {"text": "Refund with no receipt", "correct": true},
+        {"text": "Refund above the shift threshold", "correct": true},
+        {"text": "A standard refund with a valid receipt, under threshold", "correct": false},
+        {"text": "Voiding a transaction after the drawer has closed", "correct": true}
+      ],
+      "feedback_correct": "Right — overrides protect against the higher-risk refund cases.",
+      "feedback_incorrect": "Review which cases carry extra risk — those are the ones needing a manager."
+    },
+    {
+      "type": "single",
+      "bloom": "Understand",
+      "question": "Why does the POS require a manager override on certain refunds?",
+      "options": [
+        {"text": "To slow down the line on purpose", "correct": false, "feedback": "It's a control, not a delay tactic."},
+        {"text": "To add a second check on higher-risk transactions", "correct": true, "feedback": "Correct — it's a financial control on the riskier cases."},
+        {"text": "Because the system can't process them otherwise", "correct": false, "feedback": "The system can process them — the override is a deliberate approval step."}
+      ]
+    }
+  ]
+}

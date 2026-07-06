@@ -19,7 +19,7 @@ The structured model the 6 steps populate; the scripts render it. All top-level 
 | `capabilities` | Exactly 6 objects: `{icon, lead, rest}`. `icon` ∈ `funnel, map, shapes, ranking, discover, output` (bundled). `lead` is the bold verb; `rest` continues the sentence. |
 
 ### `functional_groups` (Word table + HTML tiles; ranked by priority then impact_count)
-`{area, rolls_up[], impact_count, priority, lifecycle, value_streams[]}` — `priority` ∈ Critical/High/Medium/Low. `impact_count` comes from the CIA.
+`{area, rolls_up[], impact_count, priority, lifecycle, value_streams[]}` — `priority` ∈ Critical/High/Medium/Low. `impact_count` comes from the CIA. When a group folds other areas via `rolls_up`, its `impact_count` is the sum of the folded areas' CIA counts (not a single raw column value); the grand total across all groups must still reconcile to the CIA record count.
 
 ### `value_streams`
 `{name, stages[]}` — cross-functional streams rendered as `stage → stage → …`.
