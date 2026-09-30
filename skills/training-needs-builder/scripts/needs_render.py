@@ -33,8 +33,8 @@ def normalize(records):
         out.append({
             "id": r.get("id") or f"TN-{i:02d}",
             "capability": r.get("capability", ""),
-            "audience": r.get("audience", ""),
-            "business_unit": r.get("business_unit", ""),
+            "audience": " / ".join(as_list(r.get("audience"))),
+            "business_unit": " / ".join(as_list(r.get("business_unit"))),  # a need can span several BUs
             "source_impacts": as_list(r.get("source_impacts")),
             "driver_dimensions": as_list(r.get("driver_dimensions")),
             "current_proficiency": r.get("current_proficiency", ""),
@@ -48,6 +48,16 @@ def normalize(records):
             "training_alone_insufficient": bool(r.get("training_alone_insufficient")),
             "non_training_response": r.get("non_training_response", ""),
             "notes": r.get("notes", ""),
+            # optional fields added 2026-09-30 from real-engagement use; pass through when present
+            "phase": r.get("phase", ""),
+            "phase_basis": r.get("phase_basis", ""),
+            "phase_status": ("" if not r.get("phase") else ("Unverified" if r.get("phase_unverified") else "Confirmed")),
+            "process_l2": r.get("process_l2", ""),
+            "capability_basis": r.get("capability_basis", ""),
+            "gap_basis": r.get("gap_basis", ""),
+            "population_basis": r.get("population_basis", ""),
+            "role_change_inferred": r.get("role_change_inferred", ""),
+            "reviewed": bool(r.get("reviewed")),
         })
     return out
 
@@ -85,6 +95,10 @@ def write_xlsx(path, data, navy):
             ("population_size", "Population Size", 22), ("access_constraints", "Access Constraints", 34),
             ("training_alone_insufficient", "Training Alone Insufficient", 14),
             ("non_training_response", "Non-Training Response", 44), ("notes", "Notes", 40)]
+    if any(r.get("phase") for r in data):
+        i = [c[0] for c in cols].index("business_unit") + 1
+        cols[i:i] = [("phase", "Phase", 26), ("phase_status", "Phase Status", 12), ("process_l2", "Process (L2)", 30)]
+    cols += [("phase_basis", "Phase Basis", 44), ("role_change_inferred", "Role Change (inferred)", 44)]         if any(r.get("phase") or r.get("role_change_inferred") for r in data) else []
     ws = wb.active; ws.title = "Needs Matrix"
     ws.append([c[1] for c in cols])
     for r in data:
@@ -158,7 +172,8 @@ footer{text-align:center;color:var(--mut);font-size:.72rem;padding:18px}
 const DATA=%%DATA%%, PRI_COLORS=%%PRICOLORS%%, PROF=%%PROF%%;
 const $=s=>document.querySelector(s), esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let expanded=null;
-const FILTERS=[["audience","All Audiences"],["business_unit","All BUs"],["priority","All Priorities"],["bloom_level","All Bloom Levels"]];
+const HAS_PHASE=DATA.some(d=>d.phase);
+const FILTERS=[["audience","All Audiences"],["business_unit","All BUs"]].concat(HAS_PHASE?[["phase","All Phases"],["phase_status","All Phase Statuses"]]:[]).concat([["priority","All Priorities"],["bloom_level","All Bloom Levels"]]);
 function distinct(k){return [...new Set(DATA.map(d=>d[k]).filter(Boolean))].sort();}
 function buildBar(){
   const bar=$('#bar');
@@ -184,12 +199,12 @@ function profCell(d){
 function chips(a,cls){return (a||[]).map(x=>'<span class="chip '+(cls||'')+'">'+esc(x)+'</span>').join('')||'<span style="color:#bbb">—</span>';}
 function render(){
   const rows=filtered();
-  $('#head').innerHTML=['ID','Capability','Audience','BU','Priority','Proficiency (current → target)','Modalities','Flags'].map(h=>'<th>'+h+'</th>').join('');
+  $('#head').innerHTML=['ID','Capability','Audience','BU'].concat(HAS_PHASE?['Phase']:[]).concat(['Priority','Proficiency (current → target)','Modalities','Flags']).map(h=>'<th>'+h+'</th>').join('');
   $('#body').innerHTML=rows.map(d=>{
     const pri='<span class="pri" style="background:'+(PRI_COLORS[d.priority]||'#6b7280')+'">'+esc(d.priority||'—')+'</span>';
-    const flag=d.training_alone_insufficient?'<span class="flag">training alone insufficient</span>':'';
-    const tr='<tr class="row p-'+esc(d.priority)+'" data-id="'+esc(d.id)+'"><td>'+esc(d.id)+'</td><td>'+esc(d.capability)+'</td><td>'+esc(d.audience)+'</td><td>'+esc(d.business_unit)+'</td><td>'+pri+'</td><td>'+profCell(d)+'</td><td>'+chips(d.recommended_modalities)+'</td><td>'+flag+'</td></tr>';
-    const det=(expanded===d.id)?'<tr class="detail"><td colspan="8">'+detail(d)+'</td></tr>':'';
+    const flag=(d.training_alone_insufficient?'<span class="flag">training alone insufficient</span>':'')+(d.phase_status==='Unverified'?'<span class="flag">phase unverified</span>':'');
+    const tr='<tr class="row p-'+esc(d.priority)+'" data-id="'+esc(d.id)+'"><td>'+esc(d.id)+'</td><td>'+esc(d.capability)+'</td><td>'+esc(d.audience)+'</td><td>'+esc(d.business_unit)+'</td>'+(HAS_PHASE?'<td>'+esc(d.phase||'—')+'</td>':'')+'<td>'+pri+'</td><td>'+profCell(d)+'</td><td>'+chips(d.recommended_modalities)+'</td><td>'+flag+'</td></tr>';
+    const det=(expanded===d.id)?'<tr class="detail"><td colspan="'+(HAS_PHASE?9:8)+'">'+detail(d)+'</td></tr>':'';
     return tr+det;}).join('');
   $('#body').querySelectorAll('tr.row').forEach(tr=>tr.onclick=()=>{expanded=(expanded===tr.dataset.id)?null:tr.dataset.id;render();});
   buildStats(rows);
@@ -198,9 +213,13 @@ function detail(d){
   let h='';
   h+='<div class="sec"><div class="lbl">Traceability — source change impacts (CIA)</div>'+chips(d.source_impacts,'src')+'</div>';
   h+='<div class="sec"><div class="lbl">Driver dimensions</div>'+chips(d.driver_dimensions,'dim')+'</div>';
-  if(d.gap)h+='<div class="sec"><div class="lbl">Gap</div>'+esc(d.gap)+'</div>';
+  if(d.phase_basis)h+='<div class="sec"><div class="lbl">Phase basis ('+esc(d.phase_status||'')+')</div>'+esc(d.phase_basis)+'</div>';
+  if(d.process_l2)h+='<div class="sec"><div class="lbl">Process (L2)</div>'+esc(d.process_l2)+'</div>';
+  if(d.role_change_inferred)h+='<div class="sec"><div class="lbl">Role change — inferred, not stated in the source</div>'+esc(d.role_change_inferred)+'</div>';
+  if(d.capability_basis)h+='<div class="sec"><div class="lbl">Capability basis</div>'+esc(d.capability_basis)+'</div>';
+  if(d.gap)h+='<div class="sec"><div class="lbl">Gap</div>'+esc(d.gap)+(d.gap_basis?' — '+esc(d.gap_basis):'')+'</div>';
   if(d.bloom_level)h+='<div class="sec"><div class="lbl">Bloom level</div>'+esc(d.bloom_level)+'</div>';
-  if(d.population_size)h+='<div class="sec"><div class="lbl">Population size</div>'+esc(d.population_size)+'</div>';
+  if(d.population_size)h+='<div class="sec"><div class="lbl">Population size</div>'+esc(d.population_size)+(d.population_basis?' — '+esc(d.population_basis):'')+'</div>';
   if(d.access_constraints)h+='<div class="sec"><div class="lbl">Access constraints</div>'+esc(d.access_constraints)+'</div>';
   if(d.training_alone_insufficient)h+='<div class="warnbox"><div class="lbl">Training alone insufficient — non-training response</div>'+esc(d.non_training_response||'See notes.')+'</div>';
   if(d.notes)h+='<div class="sec"><div class="lbl">Notes</div>'+esc(d.notes)+'</div>';

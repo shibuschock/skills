@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generated": "2026-07-06",
+  "generated": "2026-09-30",
   "installTarget": "$env:USERPROFILE\\.claude\\skills",
   "skills": [
     {
@@ -170,8 +170,8 @@
       "tier": 1,
       "binaries": [],
       "fileCount": 5,
-      "sizeBytes": 30691,
-      "sha256": "5d2d50b5f3c2032609d622960c19be3ffdab518ce38dc6a4e92025f5edb0e53a",
+      "sizeBytes": 37063,
+      "sha256": "889ef85a22759fffac15747d250f9231f6ba392cc87d1bf6208ce6dd2d858e42",
       "note": "Needs: pip install openpyxl"
     },
     {

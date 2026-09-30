@@ -21,10 +21,14 @@ Turn change into **who needs to learn what, to what level, and how** — a defen
 ## Workflow
 1. **Load context + inputs.** Read the project context file and the CIA (or run intake). Reconcile audiences in the context file against the CIA's actual `roles_impacted` — the CIA is canonical for roles.
 2. **Derive needs.** For each change impact, ask: *what must each affected role be able to DO that they can't today?* Produce one needs row per **audience × capability**. A single impact can yield several capabilities; multiple impacts can roll into one capability — dedup.
+   - **A role needs its own `role_changes` entry.** Appearing in an impact's `roles_impacted` is not enough to give that role a need. If the CIA names the role but says nothing about what changes for it, do not copy another role's change text onto it. Either ask, or write the change as `role_change_inferred` (with `role_change_inferred_source`) so a reviewer can see it was inferred. (In practice, copied change text and roles listed without a change produced the lessons reviewers called off-base.)
+   - **Evidence must come from the need's own business unit.** Check that the impact and the quoted source belong to the same business unit as the audience. A source about one business unit must not support a need for another (retail text on a food-and-beverage audience is the typical slip).
+   - Where a need spans several business units, `business_unit` may be a list; the renderer joins it.
 3. **Classify each need** using the methodology:
    - Set `target_proficiency` from the job (Competent for most operational roles, Proficient for leads/super-users — see §3).
    - Estimate `current_proficiency`; the gap sizes effort.
    - Set `bloom_level` for the capability (usually Apply for system tasks — see §4).
+   - **Name the canonical phase/scope source before assigning a phase.** If the program has phases or waves, ask which document is authoritative (a scope-by-phase deck or plan of record) and use only that. Set `phase` and write the source and the reason into `phase_basis`. Where the source is silent, leave the phase as your best reading and set `phase_unverified: true` rather than guessing quietly.
    - Carry `driver_dimensions` from the CIA `dimensions`; set `recommended_modalities` from the impact→response map (and the CIA's `training_modality` if present).
    - Set `priority`: inherit the impact's `priority` if present; else derive from `impact_score` = severity × complexity if those exist; **else derive from qualitative signals** (compliance exposure, go-live criticality, population size) and record the basis in `notes` so the derivation is auditable.
 4. **Flag the mismatches.** Mark `training_alone_insufficient: true` and note the coaching/comms response when **either** (a) `Mindset/Culture` or `Role/Accountability` is the impact's PRIMARY dimension, **or** (b) the impact's mitigation/consideration text names a non-training response (policy decision, role redesign, sponsor action, negotiated commitment). A secondary Mindset/Culture dimension alone doesn't force the flag — note it instead. Don't silently produce a course for a non-training problem.
@@ -36,7 +40,7 @@ Turn change into **who needs to learn what, to what level, and how** — a defen
    python3 scripts/needs_render.py --records training_needs.json --config project.json --outdir OUT
    ```
    Output in `OUT/`: `<Project> TNA.xlsx` (Needs Matrix + By Audience sheets) and `<Project> TNA Dashboard.html` (self-contained: summary tiles, filterable needs table with priority heat, current→target proficiency, modality chips, CIA traceability, and `training_alone_insufficient` flags). The renderer **drops any hours/effort field by design** — sizing is a curriculum-stage output, never a TNA output.
-8. **QA.** Every need traces to a `source_impacts` entry; no fabricated proficiencies — blanks where the source is silent; audiences match the CIA. Open the HTML (or headless-render it) and confirm the filters work, rows expand to detail, flagged needs show their non-training response, and **no hours/effort appear anywhere**. Report where the files were written.
+8. **QA.** Every need has a `phase_basis` (if phases exist) and every inferred role change is labeled as inferred. Every need traces to a `source_impacts` entry; no fabricated proficiencies — blanks where the source is silent; audiences match the CIA. Open the HTML (or headless-render it) and confirm the filters work, rows expand to detail, flagged needs show their non-training response, and **no hours/effort appear anywhere**. Report where the files were written.
 
 ## Output
 - `training_needs.json` — the matrix (feeds curriculum + rollout).
@@ -46,5 +50,7 @@ Turn change into **who needs to learn what, to what level, and how** — a defen
 
 ## Notes
 - **Won't overwrite:** re-running refuses to clobber existing outputs in `--outdir`; pass `--force` to regenerate. Requires `openpyxl`.
+- **Once people have reviewed the register, it is the record.** Do not re-derive it from the CIA over a reviewed file: that discards reviewer edits, phase assignments, and basis fields (this happened once and was caught only because a backup existed). To refresh, back up first, derive into a new file, diff, and merge by need `id`, keeping `reviewed`, `phase*`, and `*_basis` fields.
+- The renderer shows `phase`, `phase_status`, `process_l2`, and the basis fields when present and ignores them when absent, so a register without phases still renders as before.
 - Do not fabricate. A blank proficiency/hour is correct when the source doesn't support a value; an invented one is a defect (same rule as the CIA).
 - Composable: standalone (intake) or chained (CIA in → curriculum out). Don't hand-compute anything the downstream skills derive.

@@ -4,50 +4,84 @@
     "capability": "Process a refund with manager override in Acme POS",
     "audience": "Frontline staff (store / floor / counter)",
     "business_unit": "Retail",
-    "source_impacts": ["New POS refund/override workflow"],
-    "driver_dimensions": ["Ways of Working", "Process/Policy"],
+    "source_impacts": [
+      "New POS refund/override workflow"
+    ],
+    "driver_dimensions": [
+      "Ways of Working",
+      "Process/Policy"
+    ],
     "current_proficiency": "Novice",
     "target_proficiency": "Competent",
     "gap": "Moderate",
     "bloom_level": "Apply",
     "priority": "High",
-    "recommended_modalities": ["in-app guidance", "job aid", "microlearning"],
+    "recommended_modalities": [
+      "in-app guidance",
+      "job aid",
+      "microlearning"
+    ],
     "estimated_hours": 1,
     "population_size": "PLACEHOLDER — confirm frontline headcount",
     "access_constraints": "On-shift, POS-based, no email; deliver at the terminal",
-    "notes": "High turnover audience — favor in-the-flow-of-work over classroom."
+    "notes": "High turnover audience — favor in-the-flow-of-work over classroom.",
+    "phase": "Phase 1 - Foundation",
+    "phase_basis": "Scope-by-phase deck, slide 4 (PLACEHOLDER source): POS refunds go live in Phase 1.",
+    "process_l2": "R2.1 - Returns"
   },
   {
     "id": "TN-02",
     "capability": "Operate a demand-planning cycle in the Acme ERP planning module",
     "audience": "Supply chain planners / inventory support",
     "business_unit": "Supply Chain",
-    "source_impacts": ["Demand planning introduced as net-new capability"],
-    "driver_dimensions": ["Skills/Capability", "Process/Policy", "Data/Decision Inputs"],
+    "source_impacts": [
+      "Demand planning introduced as net-new capability"
+    ],
+    "driver_dimensions": [
+      "Skills/Capability",
+      "Process/Policy",
+      "Data/Decision Inputs"
+    ],
     "current_proficiency": "Novice",
     "target_proficiency": "Proficient",
     "gap": "Large",
     "bloom_level": "Analyze",
     "priority": "Critical",
-    "recommended_modalities": ["ILT", "coaching", "on-the-job practice"],
+    "recommended_modalities": [
+      "ILT",
+      "coaching",
+      "on-the-job practice"
+    ],
     "estimated_hours": 12,
     "population_size": "PLACEHOLDER",
     "access_constraints": "Classroom time hard to schedule in peak planning season",
-    "notes": "Net-new discipline; pair with super-user coaching for first cycles."
+    "notes": "Net-new discipline; pair with super-user coaching for first cycles.",
+    "phase": "Phase 2 - Planning",
+    "phase_basis": "Best reading; the scope deck does not list demand planning (PLACEHOLDER).",
+    "phase_unverified": true
   },
   {
     "id": "TN-03",
     "capability": "Trust and act on system-generated replenishment suggestions (vs. manual reorder)",
     "audience": "Team leads / supervisors",
     "business_unit": "Retail",
-    "source_impacts": ["Automated replenishment replacing manual reorder spreadsheets"],
-    "driver_dimensions": ["Mindset/Culture", "Ways of Working"],
+    "source_impacts": [
+      "Automated replenishment replacing manual reorder spreadsheets"
+    ],
+    "driver_dimensions": [
+      "Mindset/Culture",
+      "Ways of Working"
+    ],
     "current_proficiency": "Advanced Beginner",
     "target_proficiency": "Competent",
     "gap": "Moderate",
     "bloom_level": "Apply",
     "priority": "High",
-    "recommended_modalities": ["coaching", "in-app guidance", "job aid"],
+    "recommended_modalities": [
+      "coaching",
+      "in-app guidance",
+      "job aid"
+    ],
     "estimated_hours": 4,
     "population_size": "PLACEHOLDER",
     "access_constraints": "Limited desk time; deliver in-aisle on tablets",
@@ -60,14 +94,23 @@
     "capability": "Reconcile daily store sales to the general ledger in Acme ERP",
     "audience": "Finance analysts",
     "business_unit": "Finance",
-    "source_impacts": ["Store sales posting automated to GL; manual journal entries retired"],
-    "driver_dimensions": ["Process/Policy", "Data/Decision Inputs"],
+    "source_impacts": [
+      "Store sales posting automated to GL; manual journal entries retired"
+    ],
+    "driver_dimensions": [
+      "Process/Policy",
+      "Data/Decision Inputs"
+    ],
     "current_proficiency": "Advanced Beginner",
     "target_proficiency": "Proficient",
     "gap": "Moderate",
     "bloom_level": "Analyze",
     "priority": "Medium",
-    "recommended_modalities": ["VILT", "job aid", "on-the-job practice"],
+    "recommended_modalities": [
+      "VILT",
+      "job aid",
+      "on-the-job practice"
+    ],
     "estimated_hours": 6,
     "population_size": "PLACEHOLDER",
     "access_constraints": "Desk-based; avoid month-end close window",
